@@ -21,6 +21,7 @@ class World{
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.draw();
+        this.changeCloudPosition()
     }
     
     draw(){
@@ -45,5 +46,10 @@ class World{
     
     addToMap(mo) {
         this.ctx.drawImage(mo.img, mo.x, mo.y,mo.width,mo.height);
+    }
+
+    changeCloudPosition(){
+        let newPosition =  this.world.clouds[0].x - 1
+        setInterval(newPosition, 5)
     }
 }
