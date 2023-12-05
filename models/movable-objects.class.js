@@ -17,8 +17,6 @@ class MovableObject {
             setInterval(() => {
                 if(this.isAboveGround() || this.speedY > 0){
                 this.y -= this.speedY;
-                console.log('current Y', this.y)
-                console.log('current speedY', this.speedY)
                 this.speedY -= this.acceleration;
                 }
             },1000/25)
@@ -44,13 +42,11 @@ class MovableObject {
     }
 
     moveRight(){
-        console.log('moving right')
+        this.x += this.speed;
     }
 
     moveleft(){
-        setInterval(()=> {
             this.x -= this.speed;
-        },1000/60)
     }
 
     playAnimation(images){
@@ -58,6 +54,10 @@ class MovableObject {
         let path = this.IMAGES_WALKING[i];
         this.img = this.imageCache[path]
         this.currentImage++;
+    }
+
+    jump(){
+        this.speedY = 30;
     }
 
 
