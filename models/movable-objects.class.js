@@ -10,6 +10,7 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
 
 
 
@@ -23,8 +24,8 @@ class MovableObject {
     }
 
     isAboveGround(){
-        return this.y < 180
-    }
+        return this.y < 205
+        }
 
     draw(ctx){
         ctx.drawImage(this.img, this.x, this.y,this.width,this.height);
@@ -63,15 +64,26 @@ class MovableObject {
             this.x -= this.speed;
     }
 
-    playAnimation(images){
-        let i = this.currentImage % this.IMAGES_WALKING.length;
-        let path = this.IMAGES_WALKING[i];
+    playAnimation(imgArray){
+        let i = this.currentImage % imgArray.length;
+        let path = imgArray[i];
         this.img = this.imageCache[path]
         this.currentImage++;
     }
 
     jump(){
         this.speedY = 30;
+    }
+
+    hit(){
+        this.energy -= 5;
+        if(this.energy < 0){
+            this.energy = 0;
+        }
+    }
+
+    isDead(){
+        return this.energy == 0;
     }
 
     /*isColliding(obj){
