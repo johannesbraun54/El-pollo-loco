@@ -6,7 +6,9 @@ class World{
     canvas;
     ctx;
     keyboard;
-    collision = false;
+    statusBar = new StatusBar();
+    statusBarCoin = new StatusbarCoin();
+    statusBarBottle = new StatusBarBottle();
  
 
     constructor(canvas,keyboard){
@@ -15,41 +17,52 @@ class World{
         this.keyboard = keyboard
         this.draw();
         this.setWorld();
+       // this.setBar();
         this.checkCollisions();
     }
 
     setWorld(){
-        this.character.world = this
+        this.character.world = this;
     }
+
+   /* setBar(){
+        this.coinBar.world = this;
+    }*/
+
 
     checkCollisions(){
         setInterval(() => {
             this.level.enemies.forEach(enemy => {
                 if(this.character.isColliding(enemy)){
                     this.character.hit(this.character.IMAGES_HURT);
-                    this.collision = true;
+                    this.statusBar.setPercentage(this.character.energy)
                 }
             });
         }, 200);
     }
     
     draw(){
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects)
-        this.addObjectsToMap(this.level.enemies)
-        this.addObjectsToMap(this.level.clouds)
-        this.addObjectsToMap(this.level.coins)
-        this.addObjectsToMap(this.level.bottles)
-        this.addToMap(this.character)
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoin)
+        this.addToMap(this.statusBarBottle)
 
         let self = this;
         requestAnimationFrame(function() {
         self.draw();
         });
     }
+
+
 
     addObjectsToMap(objects){
         objects.forEach(o => {
