@@ -11,6 +11,7 @@ class MovableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    lastHit = 0;
 
 
 
@@ -24,7 +25,7 @@ class MovableObject {
     }
 
     isAboveGround(){
-        return this.y < 205
+        return this.y < 180
         }
 
     draw(ctx){
@@ -75,23 +76,25 @@ class MovableObject {
         this.speedY = 30;
     }
 
-    hit(){
+    hit(imgArray){
         this.energy -= 5;
+        this.playAnimation(imgArray)
         if(this.energy < 0){
             this.energy = 0;
+        }else{
+            this.lastHit = new Date().getTime();
         }
+    }
+
+    isHurt(){
+        let timepassed = new Date().getTime() - this.lastHit
+        timepassed = timepassed / 1000 
+        return timepassed < 1
     }
 
     isDead(){
         return this.energy == 0;
     }
-
-    /*isColliding(obj){
-        return  (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) && 
-                (this.Y + this.offsetY + this.height) >= obj.Y &&
-                (this.Y + this.offsetY) <= (obj.Y + obj.height) //&& 
-                //obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-    }*/
 
     isColliding(mo){
         return this.x + this.width > mo.x &&
@@ -99,7 +102,12 @@ class MovableObject {
                 this.x < mo.x && this.y < mo.y + mo.height
     }
 
-    
+        /*isColliding(obj){
+        return  (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) && 
+                (this.Y + this.offsetY + this.height) >= obj.Y &&
+                (this.Y + this.offsetY) <= (obj.Y + obj.height) //&& 
+                //obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    }*/
 
 
 }

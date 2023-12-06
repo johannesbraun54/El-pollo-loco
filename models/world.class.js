@@ -6,6 +6,7 @@ class World{
     canvas;
     ctx;
     keyboard;
+    collision = false;
  
 
     constructor(canvas,keyboard){
@@ -25,9 +26,8 @@ class World{
         setInterval(() => {
             this.level.enemies.forEach(enemy => {
                 if(this.character.isColliding(enemy)){
-                    //console.log('collision with character', enemy)
-                    this.character.hit();
-                    console.log('collision with Character, energy', this.character.energy)
+                    this.character.hit(this.character.IMAGES_HURT);
+                    this.collision = true;
                 }
             });
         }, 200);
