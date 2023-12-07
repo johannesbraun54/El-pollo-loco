@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
 
 
-
     applyGravity(){
             setInterval(() => {
                 if(this.isAboveGround() || this.speedY > 0){
@@ -18,7 +17,12 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround(){
-        return this.y < 180
+        if(this instanceof ThrowableObject){
+            return true;
+        }else{
+            return this.y < 180
+        }
+
         }
 
     moveRight(){
@@ -65,13 +69,6 @@ class MovableObject extends DrawableObject {
                 this.y + this.height > mo.y &&
                 this.x < mo.x && this.y < mo.y + mo.height
     }
-
-        /*isColliding(obj){
-        return  (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) && 
-                (this.Y + this.offsetY + this.height) >= obj.Y &&
-                (this.Y + this.offsetY) <= (obj.Y + obj.height) //&& 
-                //obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-    }*/
 
 
 }

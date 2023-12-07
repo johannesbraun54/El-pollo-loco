@@ -9,6 +9,8 @@ class World{
     statusBar = new StatusBar();
     statusBarCoin = new StatusbarCoin();
     statusBarBottle = new StatusBarBottle();
+    throwableObject = [];
+    collectedCoins = [];
  
 
     constructor(canvas,keyboard){
@@ -17,29 +19,50 @@ class World{
         this.keyboard = keyboard
         this.draw();
         this.setWorld();
-       // this.setBar();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld(){
         this.character.world = this;
     }
 
-   /* setBar(){
-        this.coinBar.world = this;
-    }*/
-
-
-    checkCollisions(){
+    run(){
         setInterval(() => {
-            this.level.enemies.forEach(enemy => {
-                if(this.character.isColliding(enemy)){
-                    this.character.hit(this.character.IMAGES_HURT);
-                    this.statusBar.setPercentage(this.character.energy)
-                }
-            });
+            this.checkThrowObjects();
+            this.checkCollision();
+            this.collectCoins();
         }, 200);
     }
+
+    checkThrowObjects(){
+        if(this.keyboard.D){
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObject.push(bottle)
+            //this.world.throwableObject[0].trow();
+        }
+    }
+
+    checkCollision(){
+        this.level.enemies.forEach(enemy => {
+            if(this.character.isColliding(enemy)){
+                this.character.hit(this.character.IMAGES_HURT);
+                this.statusBar.setPercentage(this.character.energy)
+            }
+        });
+    }
+
+    collectCoins() {
+
+        for (let i = 0; i < this.level.coins.length; i++) {
+            const coin = this.level.coins[i];  
+            if (this.character.isColliding(coin)) {
+                this.level.coins.splice(i, 1); 
+                this.collectedCoins.push(coin);
+                this.statusBarCoin.setPercentage(this.collectedCoins.length);
+            }
+        }
+    }
+    
     
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -50,6 +73,7 @@ class World{
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
