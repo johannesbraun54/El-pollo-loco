@@ -13,13 +13,15 @@ class ThrowableObject extends MovableObject{
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ]
 
-    constructor(x,y){
+    constructor(x,y,KeyD){
         super().loadImage(this.IMAGES_FLYINGBOTTLE[0])
         this.loadImages(this.IMAGES_FLYINGBOTTLE);
 
         this.x = x;
         this.y = y;
         this.trow();
+
+      
 
     }
 

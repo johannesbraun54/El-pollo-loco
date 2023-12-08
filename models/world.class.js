@@ -11,7 +11,8 @@ class World{
     statusBarBottle = new StatusBarBottle();
     throwableObject = [];
     collectedCoins = [];
-    collectedBottles = [];
+    useableBottle = 0;
+    bottle = new ThrowableObject();
  
 
     constructor(canvas,keyboard){
@@ -29,21 +30,22 @@ class World{
 
     run(){
         setInterval(() => {
-            this.checkThrowObjects();
             this.checkCollision();
             this.collectCoins();
             this.collectBottles();
+            this.checkThrowObjects();
         }, 200);
     }
 
     checkThrowObjects(){
-
-        if(this.keyboard.D && this.collectedBottles.length != 0 ){
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObject.push(bottle)
-            this.collectedBottles.splice(1);
-
-        }
+ 
+                if (this.keyboard.D && this.useableBottle != 0) { 
+                    this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100,this.keyboard.D);
+                    this.throwableObject.push(this.bottle);
+                    this.useableBottle--;
+                    console.log('useablebottles:', this.useableBottle)
+                    this.statusBarBottle.setPercentage(this.useableBottle);
+                }
     }
 
     checkCollision(){
@@ -70,12 +72,14 @@ class World{
     collectBottles() {
 
         for (let i = 0; i < this.level.bottles.length; i++) {
-            const bottle = this.level.bottles[i];  
-            if (this.character.isColliding(bottle)) {
-                this.level.bottles.splice(i, 1); 
-                this.collectedBottles.push(bottle);
-                //console.log('collected Bottles:', this.collectedBottles.length);
-                this.statusBarBottle.setPercentage(this.collectedBottles.length);
+            const collectedbottle = this.level.bottles[i];  
+            if (this.character.isColliding(collectedbottle)) {
+                this.level.bottles.splice(i, 1); // flasche wird nicht mehr angezeigt
+                this.useableBottle++;
+                console.log('useableBottle:', this.useableBottle)
+                //this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100,this.keyboard.D);
+                //this.throwableObject.push(this.bottle);
+                this.statusBarBottle.setPercentage(this.useableBottle);
             }
         }
     }
