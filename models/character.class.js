@@ -38,6 +38,11 @@ class Character extends MovableObject{
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png',
     ]
+
+    IMAGES_GAMEOVER = [
+        'img/9_intro_outro_screens/game_over/oh no you lost!.png',
+    ]
+
     world;
     walking_sound = new Audio('audio/running.mp3')
     
@@ -46,7 +51,8 @@ class Character extends MovableObject{
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEATH);
-        this.loadImages(this.IMAGES_HURT)
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_GAMEOVER);
         this.applyGravity();
         this.animate();
     }
@@ -94,6 +100,18 @@ class Character extends MovableObject{
                 }
             }
         },50)
+
+        setTimeout(() => {
+            if(this.isDead()){
+                this.x = 0;
+                this.y = 0;
+                this.height = 480;
+                this.width = 720;
+                this.playAnimation(this.IMAGES_GAMEOVER);
+            }
+
+        },2)
+
     }
 
 }

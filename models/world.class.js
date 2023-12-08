@@ -34,23 +34,34 @@ class World{
             this.collectCoins();
             this.collectBottles();
             this.checkThrowObjects();
-        }, 200);
+            this.jumpOnEnemies();
+           // this.checkGameEnd();
+        }, 150);
+    }
+
+    jumpOnEnemies(){
+        this.level.enemies.forEach(enemy => {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround()){
+                enemy.energy -= 100;
+            }
+        })
+
     }
 
     checkThrowObjects(){
  
-                if (this.keyboard.D && this.useableBottle != 0) { 
-                    this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100,this.keyboard.D);
-                    this.throwableObject.push(this.bottle);
-                    this.useableBottle--;
-                    console.log('useablebottles:', this.useableBottle)
-                    this.statusBarBottle.setPercentage(this.useableBottle);
-                }
+        if (this.keyboard.D && this.useableBottle != 0) { 
+            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100,this.keyboard.D);
+            this.throwableObject.push(this.bottle);
+            this.useableBottle--;
+            console.log('useablebottles:', this.useableBottle)
+            this.statusBarBottle.setPercentage(this.useableBottle);
+        }
     }
 
     checkCollision(){
         this.level.enemies.forEach(enemy => {
-            if(this.character.isColliding(enemy)){
+            if(this.character.isColliding(enemy) && !(this.character.isAboveGround())){
                 this.character.hit(this.character.IMAGES_HURT);
                 this.statusBar.setPercentage(this.character.energy)
             }
@@ -81,6 +92,12 @@ class World{
                 //this.throwableObject.push(this.bottle);
                 this.statusBarBottle.setPercentage(this.useableBottle);
             }
+        }
+    }
+
+    checkGameEnd(){
+        if(this.character.isDead()){
+            new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',0);
         }
     }
     

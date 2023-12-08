@@ -1,4 +1,4 @@
-class Level{
+class Level extends MovableObject{
     enemies;
     clouds;
     coins;
@@ -7,7 +7,7 @@ class Level{
     level_end_x = 2200; 
 
     constructor(enemies, clouds, coins, bottle, backgroundObjects){
-        this.enemies = enemies;
+        super().enemies = enemies;
         this.clouds = clouds;
         this.coins = coins;
         this.bottles = bottle;

@@ -65,10 +65,9 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo){
-        return this.x + this.width > mo.x &&
-                this.y + this.height > mo.y &&
+        return  this.x + this.width > mo.x && // kontrolle kollision character vorderkante mit enemy 
+                this.y + this.height > mo.y && // kontrolle kollision Y-Achse
                 this.x < mo.x && this.y < mo.y + mo.height
     }
-
 
 }
