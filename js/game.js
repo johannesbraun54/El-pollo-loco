@@ -13,22 +13,23 @@ function init(){
 
 window.addEventListener("keydown", (e) => {
 
-    if(e.keyCode == 39){
+    if(e.keyCode == 39 && !(world.character.dead)){
+         console.log('my character is', world.character);
         keyboard.RIGHT = true;
     }
-    if(e.keyCode == 37){
+    if(e.keyCode == 37 && !(world.character.dead)){
         keyboard.LEFT = true;
     }
-    if(e.keyCode == 38){
+    if(e.keyCode == 38 && !(world.character.dead)){
         keyboard.UP = true;
     }
-    if(e.keyCode == 40){
+    if(e.keyCode == 40 && !(world.character.dead)){
         keyboard.DOWN = true;
     }
-    if(e.keyCode == 32){
+    if(e.keyCode == 32 && !(world.character.dead)){
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 68){
+    if (e.keyCode == 68 && !(world.character.dead)){
         keyboard.D = true;
     }
 });

@@ -3,6 +3,7 @@ class Character extends MovableObject{
     height = 250;
     y = 10;
     speed = 10;
+    dead = false;
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -80,17 +81,13 @@ class Character extends MovableObject{
               this.jump();
             }
 
-
-
             this.world.camera_x = -this.x +100;
         },1000/60)
 
     //jump, dead and walk animation
 
         setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEATH);
-            } else if (this.isHurt()) {
+         if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
@@ -100,18 +97,8 @@ class Character extends MovableObject{
                 }
             }
         },50)
-
-        setTimeout(() => {
-            if(this.isDead()){
-                this.x = 0;
-                this.y = 0;
-                this.height = 480;
-                this.width = 720;
-                this.playAnimation(this.IMAGES_GAMEOVER);
-            }
-
-        },2)
-
     }
+
+
 
 }

@@ -37,6 +37,7 @@ class World{
             this.checkThrowObjects();
             this.jumpOnEnemies();
             this.checkGameEnd();
+            this.checkDead();
         }, 150);
     }
 
@@ -47,6 +48,16 @@ class World{
             }
         })
 
+    }
+
+    checkDead(){
+
+        if(this.character.isDead()){
+            for (let i = 0; i < this.character.IMAGES_DEATH.length; i++) {
+                this.character.playAnimation(this.character.IMAGES_DEATH);
+            }
+           
+        }
     }
 
     checkThrowObjects(){
@@ -62,7 +73,7 @@ class World{
 
     checkCollision(){
         this.level.enemies.forEach(enemy => {
-            if(this.character.isColliding(enemy) && !(this.character.isAboveGround())){
+            if(this.character.isColliding(enemy) && !(this.character.isAboveGround()) && !(this.character.isDead())){
                 this.character.hit(this.character.IMAGES_HURT);
                 this.statusBar.setPercentage(this.character.energy)
             }
