@@ -13,23 +13,23 @@ class ThrowableObject extends MovableObject{
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ]
 
-    constructor(x,y,KeyD){
+    constructor(x,y){
         super().loadImage(this.IMAGES_FLYINGBOTTLE[0])
         this.loadImages(this.IMAGES_FLYINGBOTTLE);
 
         this.x = x;
         this.y = y;
         this.trow();
-
-      
-
     }
+
+
 
     trow(){
         this.speedY = 30;
         this.applyGravity();
         setInterval(() => {
             this.x += 10;
+            this.playAnimation(this.IMAGES_FLYINGBOTTLE);
         },25)
     }
 

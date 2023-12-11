@@ -13,6 +13,7 @@ class World{
     collectedCoins = [];
     useableBottle = 0;
     bottle = new ThrowableObject();
+    endscreen;
  
 
     constructor(canvas,keyboard){
@@ -35,7 +36,7 @@ class World{
             this.collectBottles();
             this.checkThrowObjects();
             this.jumpOnEnemies();
-           // this.checkGameEnd();
+            this.checkGameEnd();
         }, 150);
     }
 
@@ -87,9 +88,7 @@ class World{
             if (this.character.isColliding(collectedbottle)) {
                 this.level.bottles.splice(i, 1); // flasche wird nicht mehr angezeigt
                 this.useableBottle++;
-                console.log('useableBottle:', this.useableBottle)
-                //this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100,this.keyboard.D);
-                //this.throwableObject.push(this.bottle);
+                console.log('useableBottle:', this.useableBottle);
                 this.statusBarBottle.setPercentage(this.useableBottle);
             }
         }
@@ -97,7 +96,8 @@ class World{
 
     checkGameEnd(){
         if(this.character.isDead()){
-            new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',0);
+          this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',0);
+          this.addToMap(this.endscreen);
         }
     }
     
@@ -112,6 +112,10 @@ class World{
         this.addObjectsToMap(this.level.bottles);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);
+        if(this.character.isDead()){
+            this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
+            this.addToMap(this.endscreen);
+        }
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
