@@ -7,29 +7,27 @@ function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas,keyboard);
 
-    console.log('my character is', world.character);
-
 }
 
 window.addEventListener("keydown", (e) => {
 
-    if(e.keyCode == 39 && !(world.character.dead)){
-         console.log('my character is', world.character);
+    if(e.keyCode == 39 && !(world.character.isDead())){
+
         keyboard.RIGHT = true;
     }
-    if(e.keyCode == 37 && !(world.character.dead)){
+    if(e.keyCode == 37 && !(world.character.isDead())){
         keyboard.LEFT = true;
     }
-    if(e.keyCode == 38 && !(world.character.dead)){
+    if(e.keyCode == 38 && !(world.character.isDead())){
         keyboard.UP = true;
     }
-    if(e.keyCode == 40 && !(world.character.dead)){
+    if(e.keyCode == 40 && !(world.character.isDead())){
         keyboard.DOWN = true;
     }
-    if(e.keyCode == 32 && !(world.character.dead)){
+    if(e.keyCode == 32 && !(world.character.isDead())){
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 68 && !(world.character.dead)){
+    if (e.keyCode == 68 && !(world.character.isDead())){
         keyboard.D = true;
     }
 });

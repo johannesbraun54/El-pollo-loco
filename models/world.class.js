@@ -23,6 +23,7 @@ class World{
         this.draw();
         this.setWorld();
         this.run();
+        this.checkBottleHit();
     }
 
     setWorld(){
@@ -38,7 +39,7 @@ class World{
             this.jumpOnEnemies();
             this.checkGameEnd();
             this.checkDead();
-        }, 150);
+        },150);
     }
 
     jumpOnEnemies(){
@@ -48,6 +49,18 @@ class World{
             }
         })
 
+    }
+
+    checkBottleHit(){
+        setInterval(() => {
+            this.level.enemies.forEach(enemy => {
+                if(this.bottle.isColliding(enemy)){
+                    this.bottle.trow(0,2,this.bottle.IMAGES_SPLASH);
+
+                }
+            })
+        },25)
+        
     }
 
     checkDead(){
@@ -63,7 +76,7 @@ class World{
     checkThrowObjects(){
  
         if (this.keyboard.D && this.useableBottle != 0) { 
-            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100,this.keyboard.D);
+            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, 30, 30,this.bottle.IMAGES_FLYINGBOTTLE);
             this.throwableObject.push(this.bottle);
             this.useableBottle--;
             console.log('useablebottles:', this.useableBottle)

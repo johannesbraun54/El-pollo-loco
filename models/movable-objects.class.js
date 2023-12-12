@@ -34,10 +34,11 @@ class MovableObject extends DrawableObject {
     }
 
     playAnimation(imgArray){
-        let i = this.currentImage % imgArray.length;
-        let path = imgArray[i];
-        this.img = this.imageCache[path]
-        this.currentImage++;
+
+            let i = this.currentImage % imgArray.length;
+            let path = imgArray[i];
+            this.img = this.imageCache[path]
+            this.currentImage++;
     }
 
     jump(){
