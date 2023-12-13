@@ -17,6 +17,7 @@ class World{
     bottle = new ThrowableObject();
     endscreen;
     gameover = false;
+    space;
  
 
     constructor(canvas,keyboard){
@@ -41,6 +42,7 @@ class World{
             this.checkThrowObjects();
             this.jumpOnEnemies();
             this.checkDead();
+            this.checkForEndbossAttack();
         },150);
     }
 
@@ -55,6 +57,10 @@ class World{
         }
 
     }
+
+    checkForEndbossAttack(){
+        this.space = this.level.enemies[19].x - this.character.x 
+    } 
 
     checkBottleHit(){
         setInterval(() => {
