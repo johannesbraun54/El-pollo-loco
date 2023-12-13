@@ -9,11 +9,14 @@ class World{
     statusBar = new StatusBar();
     statusBarCoin = new StatusbarCoin();
     statusBarBottle = new StatusBarBottle();
+    statusBarEndboss = new StatusbarEndboss();
+    healthImg = new HealthImg();
     throwableObject = [];
     collectedCoins = [];
     useableBottle = 0;
     bottle = new ThrowableObject();
     endscreen;
+    endboss = new Endboss();
  
 
     constructor(canvas,keyboard){
@@ -55,8 +58,9 @@ class World{
         setInterval(() => {
             this.level.enemies.forEach(enemy => {
                 if(this.bottle.isColliding(enemy)){
+                    this.endboss.hit();
+                    this.statusBarEndboss.setPercentage(this.endboss.energy)
                     this.bottle.trow(0,2,this.bottle.IMAGES_SPLASH);
-
                 }
             })
         },25)
@@ -87,7 +91,7 @@ class World{
     checkCollision(){
         this.level.enemies.forEach(enemy => {
             if(this.character.isColliding(enemy) && !(this.character.isAboveGround()) && !(this.character.isDead())){
-                this.character.hit(this.character.IMAGES_HURT);
+                this.character.hit();
                 this.statusBar.setPercentage(this.character.energy)
             }
         });
@@ -143,8 +147,10 @@ class World{
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
-        this.addToMap(this.statusBarCoin)
-        this.addToMap(this.statusBarBottle)
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        this.addToMap(this.statusBarEndboss);
+        this.addToMap(this.healthImg);
 
         let self = this;
         requestAnimationFrame(function() {

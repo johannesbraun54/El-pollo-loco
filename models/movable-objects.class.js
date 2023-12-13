@@ -45,9 +45,8 @@ class MovableObject extends DrawableObject {
         this.speedY = 30;
     }
 
-    hit(imgArray){
+    hit(){
         this.energy -= 5;
-        this.playAnimation(imgArray)
         if(this.energy < 0){
             this.energy = 0;
         }else{
@@ -56,10 +55,11 @@ class MovableObject extends DrawableObject {
     }
 
     isHurt(){
-        let timepassed = new Date().getTime() - this.lastHit
-        timepassed = timepassed / 1000 
-        return timepassed < 1
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000; 
+        return timepassed < 1;
     }
+
 
     isDead(){
         return this.energy == 0;
