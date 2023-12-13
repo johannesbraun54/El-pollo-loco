@@ -45,11 +45,14 @@ class World{
     }
 
     jumpOnEnemies(){
-        this.level.enemies.forEach(enemy => {
+
+        for (let i = 0; i < this.level.enemies.length -1; i++) {
+            const enemy = this.level.enemies[i];
             if (this.character.isColliding(enemy) && this.character.isAboveGround()){
+                this.character.jump();
                 enemy.energy -= 100;
             }
-        })
+        }
 
     }
 
@@ -87,7 +90,8 @@ class World{
     }
 
     checkCollision(){
-        this.level.enemies.forEach(enemy => {
+
+       this.level.enemies.forEach(enemy => {
             if(this.character.isColliding(enemy) && !(this.character.isAboveGround()) && !(this.character.isDead())){
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy)
@@ -136,7 +140,7 @@ class World{
             this.addToMap(this.endscreen);
             this.gameover = true;
         }
-        if(this.level.enemies[3].isDead()){
+        if(this.level.enemies[this.level.enemies.length -1].isDead()){
             this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
             this.addToMap(this.endscreen);
             this.gameover = true;

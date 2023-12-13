@@ -1,7 +1,8 @@
 class Bottle extends MovableObject{
 
-    height = 100;
-    y = 330;
+    height = 60;
+    width = 60;
+    y = 365;
 
 
     IMAGES_WALKING = [
