@@ -22,7 +22,6 @@ class StatusbarEndboss extends DrawableObject {
         this.width = 200;
         this.height = 60;
         this.setPercentage(100);
-        //this.loadHealthImage();
     }
 
     //setPercentage(50)
@@ -30,15 +29,6 @@ class StatusbarEndboss extends DrawableObject {
         this.percentage = percentage; 
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-    }
-
-    loadHealthImage(){
-        this.otherDirection = false;
-        this.loadImage('img/7_statusbars/3_icons/icon_health_endboss.png');
-        this.height = 60;
-        this.width = 60;
-        this.x = 500;
-        this.y = 20;
     }
 
     resolveImageIndex(){

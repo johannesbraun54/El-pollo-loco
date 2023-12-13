@@ -16,7 +16,7 @@ class World{
     useableBottle = 0;
     bottle = new ThrowableObject();
     endscreen;
-    endboss = new Endboss();
+    gameover = false;
  
 
     constructor(canvas,keyboard){
@@ -40,7 +40,6 @@ class World{
             this.collectBottles();
             this.checkThrowObjects();
             this.jumpOnEnemies();
-            this.checkGameEnd();
             this.checkDead();
         },150);
     }
@@ -56,15 +55,14 @@ class World{
 
     checkBottleHit(){
         setInterval(() => {
-            this.level.enemies.forEach(enemy => {
+            this.level.enemies.forEach((enemy) => {
                 if(this.bottle.isColliding(enemy)){
-                    this.endboss.hit();
-                    this.statusBarEndboss.setPercentage(this.endboss.energy)
+                    enemy.hit();
+                    this.statusBarEndboss.setPercentage(enemy.energy)
                     this.bottle.trow(0,2,this.bottle.IMAGES_SPLASH);
                 }
             })
-        },25)
-        
+        },25)    
     }
 
     checkDead(){
@@ -121,13 +119,6 @@ class World{
             }
         }
     }
-
-    checkGameEnd(){
-        if(this.character.isDead()){
-          this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',0);
-          this.addToMap(this.endscreen);
-        }
-    }
     
     
     draw(){
@@ -143,6 +134,12 @@ class World{
         if(this.character.isDead()){
             this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
             this.addToMap(this.endscreen);
+            this.gameover = true;
+        }
+        if(this.level.enemies[3].isDead()){
+            this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
+            this.addToMap(this.endscreen);
+            this.gameover = true;
         }
 
         this.ctx.translate(-this.camera_x, 0);
