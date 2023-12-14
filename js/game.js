@@ -1,12 +1,18 @@
 let canvas;
+let gamestart = false;
 let world;
 let keyboard = new Keyboard();
 
 
 function init(){
     canvas = document.getElementById('canvas');
+
     world = new World(canvas,keyboard);
 
+}
+
+function gameStart(){
+    world.gamestart = true;
 }
 
 window.addEventListener("keydown", (e) => {

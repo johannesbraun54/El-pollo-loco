@@ -12,6 +12,11 @@ body {
     background-position: start;
 }
 
+button{
+    position: absolute;
+    top: 590px;
+}
+
 h1{
     font-size: 64px;
     letter-spacing: 3px;
@@ -22,6 +27,13 @@ canvas {
     background-color: black;
     display: block;
 }
+
+.description {
+    display: flex;
+    gap: 12px;
+}
+
+
 
 
 @media only screen and (max-width: 720px){
