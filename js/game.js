@@ -9,6 +9,7 @@ function init(){
 
     world = new World(canvas,keyboard);
 
+
 }
 
 function gameStart(){

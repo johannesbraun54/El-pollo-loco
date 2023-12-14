@@ -24,15 +24,28 @@ class World{
  
 
     constructor(canvas,keyboard){
-       
-        //initLevel();
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard
-        this.draw();
         this.setWorld();
-        this.run();
-        this.checkBottleHit();
+        this.drawStartscreen();
+        this.checkForGameStart();
+       
+    }
+
+    checkForGameStart(){
+         setInterval(() => {
+            if(this.gamestart){
+                initLevel();
+                if(this.level != undefined){
+                    this.draw();
+                    this.run();
+                    this.checkBottleHit();
+                }else{
+                    console.log('level undefined')
+                }
+            }
+        },1000)
 
     }
 
@@ -135,11 +148,17 @@ class World{
             }
         }
     }
-    
+    drawStartscreen(){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.addToMap(this.startscreen);   
+
+        let self = this;
+        requestAnimationFrame(() => {
+            self.drawStartscreen();
+        })
+    }
     
     draw(){
-        this.addToMap(this.startscreen);
-        if(this.gamestart){
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.translate(this.camera_x, 0);
             this.addObjectsToMap(this.level.backgroundObjects);
@@ -167,7 +186,7 @@ class World{
             this.addToMap(this.statusBarBottle);
             this.addToMap(this.statusBarEndboss);
             this.addToMap(this.healthImg);
-        }
+
 
       
 
