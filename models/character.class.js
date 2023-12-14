@@ -88,7 +88,6 @@ class Character extends MovableObject{
 
     getLastMove(){
         this.lastMove = new Date().getTime();
-        console.log('last move',this.lastMove)
     }
 
     checklastMove(){

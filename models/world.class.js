@@ -19,7 +19,7 @@ class World{
     gamestart = false;
     gameover = false;
     space = 0;
-    level = level1;
+   
 
  
 
@@ -28,25 +28,25 @@ class World{
         this.canvas = canvas;
         this.keyboard = keyboard
         this.setWorld();
-        this.drawStartscreen();
-        this.checkForGameStart();
-       
-    }
+        this.draw();
+        this.checkForRunning();
+    }  
+    
 
     checkForGameStart(){
-         setInterval(() => {
             if(this.gamestart){
                 initLevel();
-                if(this.level != undefined){
-                    this.draw();
-                    this.run();
-                    this.checkBottleHit();
-                }else{
-                    console.log('level undefined')
-                }
+                this.level = level1;
+            }
+    }
+
+    checkForRunning(){
+        setInterval(() => {
+            if(this.gamestart){
+                this.run();
+                this.checkBottleHit();
             }
         },1000)
-
     }
 
     setWorld(){
@@ -78,7 +78,7 @@ class World{
     }
 
     checkForEndbossAttack(){
-        this.space = this.level.enemies[19].x - this.character.x 
+        this.space = this.level.enemies[this.level.enemies.length -1].x - this.character.x 
     } 
 
     checkBottleHit(){
@@ -148,7 +148,7 @@ class World{
             }
         }
     }
-    drawStartscreen(){
+    /*drawStartscreen(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addToMap(this.startscreen);   
 
@@ -156,44 +156,49 @@ class World{
         requestAnimationFrame(() => {
             self.drawStartscreen();
         })
-    }
+    }*/
     
     draw(){
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.translate(this.camera_x, 0);
-            this.addObjectsToMap(this.level.backgroundObjects);
-            this.addObjectsToMap(this.level.enemies);
-            this.addObjectsToMap(this.level.clouds);
-            this.addObjectsToMap(this.level.coins);
-            this.addObjectsToMap(this.level.bottles);
-            this.addToMap(this.character);
-            this.addObjectsToMap(this.throwableObject);
+            this.addToMap(this.startscreen);  
+            this.ctx.translate(-this.camera_x, 0); 
+
+            if(this.gamestart){
+                this.ctx.translate(this.camera_x, 0);
+                this.addObjectsToMap(this.level.backgroundObjects);
+                this.addObjectsToMap(this.level.enemies);
+                this.addObjectsToMap(this.level.clouds);
+                this.addObjectsToMap(this.level.coins);
+                this.addObjectsToMap(this.level.bottles);
+                this.addToMap(this.character);
+                this.addObjectsToMap(this.throwableObject);
+               
+                if(this.character.isDead()){
+                    this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
+                    this.addToMap(this.endscreen);
+                    this.gameover = true;
+                }
+                if(this.level.enemies[this.level.enemies.length -1].isDead()){
+                    this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
+                    this.addToMap(this.endscreen);
+                    this.gameover = true;
+                }
+        
+                this.ctx.translate(-this.camera_x, 0);
+                this.addToMap(this.statusBar);
+                this.addToMap(this.statusBarCoin);
+                this.addToMap(this.statusBarBottle);
+                this.addToMap(this.statusBarEndboss);
+                this.addToMap(this.healthImg);
+                
+
+            }
            
-            if(this.character.isDead()){
-                this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
-                this.addToMap(this.endscreen);
-                this.gameover = true;
-            }
-            if(this.level.enemies[this.level.enemies.length -1].isDead()){
-                this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
-                this.addToMap(this.endscreen);
-                this.gameover = true;
-            }
-    
-            this.ctx.translate(-this.camera_x, 0);
-            this.addToMap(this.statusBar);
-            this.addToMap(this.statusBarCoin);
-            this.addToMap(this.statusBarBottle);
-            this.addToMap(this.statusBarEndboss);
-            this.addToMap(this.healthImg);
-
-
-      
-
-        let self = this;
-        requestAnimationFrame(function() {
-        self.draw();
-        });
+            let self = this;
+            requestAnimationFrame(function() {
+            self.draw();
+            });
     }
 
 

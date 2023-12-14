@@ -5,15 +5,19 @@ let keyboard = new Keyboard();
 
 
 function init(){
+    //initLevel();
     canvas = document.getElementById('canvas');
-
     world = new World(canvas,keyboard);
-
 
 }
 
+function startTheGame(){
+    gameStart();
+    world.checkForGameStart();
+}
+
 function gameStart(){
-    world.gamestart = true;
+   world.gamestart = true;
 }
 
 window.addEventListener("keydown", (e) => {
