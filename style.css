@@ -9,12 +9,70 @@ body {
     align-items: center;
     background-image: url('img/5_background/canyon-7631482_1920.png');
     font-family:'zabars',Arial, Helvetica, sans-serif;
+  
+}
+
+.absolute{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 578px;
+}
+
+.absolute img{
+    width: 40px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #b05b22;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:active {
+    background-color: #9f5321;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.gameStartBtn{
+    width: 720px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.gameStartBtn img{
+    cursor: pointer;
+}
+
+.fullscreen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     background-position: start;
 }
 
-button{
-    position: absolute;
-    top: 590px;
+.mobileKey{
+    display: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #b05b22;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobileKey:active{
+    background-color: #9f5321;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 h1{
@@ -40,12 +98,23 @@ canvas {
     canvas{
         width: 100%;
     }
+
+    .mobileKey{
+        display: flex;
+    }
 }
 
 @media only screen and (max-height: 480px){
     canvas{
         width: 100%;
         height: 100vh;
+    }
+    .mobileKey{
+        display: flex;
+    }
+
+    .absolute{
+        top: 390px;
     }
 
     h1 {

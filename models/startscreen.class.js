@@ -1,7 +1,7 @@
 class Startscreen extends DrawableObject {
 
     height = 480;
-    width = 720;
+    width = 740;
     x = 0;
     y = 0;
 

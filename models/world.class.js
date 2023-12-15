@@ -19,9 +19,6 @@ class World{
     gamestart = false;
     gameover = false;
     space = 0;
-   
-
- 
 
     constructor(canvas,keyboard){
         this.ctx = canvas.getContext('2d');
@@ -148,15 +145,15 @@ class World{
             }
         }
     }
-    /*drawStartscreen(){
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.addToMap(this.startscreen);   
+    clearAllIntervals() {
+        setTimeout(() => {
+            for (let i = 1; i < 9999; i++){
+                window.clearInterval(i);
 
-        let self = this;
-        requestAnimationFrame(() => {
-            self.drawStartscreen();
-        })
-    }*/
+            }
+        },2000)
+    }
+
     
     draw(){
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -178,11 +175,13 @@ class World{
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
                     this.gameover = true;
+                    this.clearAllIntervals()
                 }
                 if(this.level.enemies[this.level.enemies.length -1].isDead()){
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
                     this.gameover = true;
+                    this.clearAllIntervals()
                 }
         
                 this.ctx.translate(-this.camera_x, 0);
