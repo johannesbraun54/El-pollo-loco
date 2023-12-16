@@ -23,7 +23,18 @@ body {
     width: 40px;
 }
 
-button {
+.startBtn{
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #b05b22;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.restartBtn{
+    display: none;
     padding: 15px 30px;
     font-size: 20px;
     cursor: pointer;
@@ -91,16 +102,17 @@ canvas {
     gap: 12px;
 }
 
+.gameIcons{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
 
 
 
 @media only screen and (max-width: 720px){
     canvas{
         width: 100%;
-    }
-
-    .mobileKey{
-        display: flex;
     }
 }
 

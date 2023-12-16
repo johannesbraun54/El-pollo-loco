@@ -26,6 +26,7 @@ class World{
         this.keyboard = keyboard
         this.setWorld();
         this.draw();
+        //this.run();
         this.checkForRunning();
     }  
     
@@ -34,6 +35,8 @@ class World{
             if(this.gamestart){
                 initLevel();
                 this.level = level1;
+                this.level.enemies[4].energy= 100
+                this.character.energy = 100
             }
     }
 
@@ -41,9 +44,8 @@ class World{
         setInterval(() => {
             if(this.gamestart){
                 this.run();
-                this.checkBottleHit();
             }
-        },1000)
+        },100)
     }
 
     setWorld(){
@@ -51,7 +53,6 @@ class World{
     }
 
     run(){
-        setInterval(() => {
             this.checkCollision();
             this.collectCoins();
             this.collectBottles();
@@ -59,7 +60,7 @@ class World{
             this.jumpOnEnemies();
             this.checkDead();
             this.checkForEndbossAttack();
-        },150);
+            this.checkBottleHit();
     }
 
     jumpOnEnemies(){
@@ -87,7 +88,8 @@ class World{
                     this.bottle.trow(0,2,this.bottle.IMAGES_SPLASH);
                 }
             })
-        },25)    
+        },1200)
+
     }
 
     checkDead(){
@@ -151,8 +153,9 @@ class World{
                 window.clearInterval(i);
 
             }
-        },2000)
+        },500)
     }
+    
 
     
     draw(){
@@ -175,13 +178,15 @@ class World{
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
                     this.gameover = true;
-                    this.clearAllIntervals()
+                    this.clearAllIntervals();
+                    showRestartBtn();
                 }
                 if(this.level.enemies[this.level.enemies.length -1].isDead()){
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
                     this.gameover = true;
-                    this.clearAllIntervals()
+                    this.clearAllIntervals();
+                    showRestartBtn();
                 }
         
                 this.ctx.translate(-this.camera_x, 0);

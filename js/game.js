@@ -23,12 +23,24 @@ function startTheGame(){
  }
 }
 
+
 function gameStart(){
    world.gamestart = true;
 }
 
+
+function restartTheGame(){
+    gameStart()
+    init();
+    startTheGame();
+}
+
 function hideButton(){
     document.getElementById('startBtn').style = 'display: none;'
+}
+
+function showRestartBtn(){
+    document.getElementById('restartBtn').style = 'display: flex;'
 }
 
 function steerSound(){

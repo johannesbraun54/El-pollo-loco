@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>El Pollo Loco</title>
+    <link rel="shortcut icon" href="img/4_enemie_boss_chicken/2_alert/G11.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="models/drawable-objects.class.js"></script>
     <script src="models/movable-objects.class.js"></script>
@@ -50,13 +51,14 @@
     <div class="absolute">
 
         <div class="gameStartBtn">
-            <img onclick="steerSound()" id="soundON" src="img/9_intro_outro_screens/soundOn.png">
+            <img onclick="steerSound()" id="soundON" class="gameIcons" src="img/9_intro_outro_screens/soundOn.png">
             <div id="btnLeft" class="mobileKey" onclick="moveOnMobile()"><img src="img/9_intro_outro_screens/arrow-left.png"></div>
             <div id="btnJump" class="mobileKey" ><img src="img/9_intro_outro_screens/arrow-up.png"></div>
-            <button id="startBtn" onclick="startTheGame()">START</button>
+            <button class="startBtn" id="startBtn" onclick="startTheGame()">START</button>
+            <button class="restartBtn" id="restartBtn" onclick="restartTheGame()">Try Again</button>
             <div id="throwBottle" class="mobileKey" ><img src="img/9_intro_outro_screens/bottle.png"></div>
             <div id="btnRight" class="mobileKey" ><img src="img/9_intro_outro_screens/arrow-right.png"></div>
-            <img onclick="becomeFullscreen()" id="fullscreenIcon" src="img/9_intro_outro_screens/fullscreen.svg">
+            <img onclick="becomeFullscreen()" id="fullscreenIcon" class="gameIcons" src="img/9_intro_outro_screens/fullscreen.svg">
         </div>
     </div>
        
