@@ -4,6 +4,7 @@ class SmallChicken extends MovableObject {
     speedY = 0.5;
     height = 80;
     width = 60;
+    playSound = true;
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
@@ -13,6 +14,8 @@ class SmallChicken extends MovableObject {
     IMAGES_DEAD = [
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
     ]
+
+    chicken_sound = new Audio('audio/chicken.mp3');
 
 
     constructor(){
@@ -41,8 +44,16 @@ class SmallChicken extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
             this.speed = 0;
             setInterval(() => {
+                this.playChickenSound();
                 this.y += this.speedY;
             })  
+        }
+    }
+
+    playChickenSound(){
+        if(this.playSound){
+            this.chicken_sound.play();
+            this.playSound = false;
         }
     }
 }

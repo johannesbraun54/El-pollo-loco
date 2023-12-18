@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     lastJump = 0;
+    offsetY = 0;
 
 
     applyGravity(){
@@ -68,8 +69,16 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo){
         return  this.x + this.width > mo.x && // kontrolle kollision character vorderkante mit enemy 
-                this.y + this.height > mo.y && // kontrolle kollision Y-Achse
+                this.y  + this.height > mo.y && // kontrolle kollision Y-Achse
                 this.x < mo.x && this.y < mo.y + mo.height
     }
+
+    /*isColliding(mo) {
+        return  (this.X + this.width) >= mo.X && this.X <= (mo.X + mo.width) && 
+                (this.Y + this.offsetY + this.height) >= mo.Y &&
+                (this.Y + this.offsetY) <= (mo.Y + mo.height); 
+               // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    }*/
+
 
 }

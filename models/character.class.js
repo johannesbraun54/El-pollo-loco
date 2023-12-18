@@ -4,6 +4,7 @@ class Character extends MovableObject{
     y = 10;
     speed = 10;
     lastMove = 100;
+    offsetY = -50;
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -72,6 +73,7 @@ class Character extends MovableObject{
 
     world;
     walking_sound = new Audio('audio/running.mp3')
+    hurt_sound = new Audio('audio/hurt.wav')
     
     constructor(){
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -136,6 +138,7 @@ class Character extends MovableObject{
     walkAnimation = () => {
             if (this.isHurt()) {
                    this.playAnimation(this.IMAGES_HURT);
+                   this.hurt_sound.play();
                }else if (this.isAboveGround()) {
                    this.playAnimation(this.IMAGES_JUMPING);
                }else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
