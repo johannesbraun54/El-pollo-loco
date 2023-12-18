@@ -25,6 +25,16 @@ function initLevel(){
             new Bottle(),
             new Bottle(),
             new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
         ],
     
         [

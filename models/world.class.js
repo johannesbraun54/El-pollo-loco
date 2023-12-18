@@ -17,8 +17,11 @@ class World{
     startscreen = new Startscreen();
     endscreen;
     gamestart = false;
+    characterDied = false;
+    endbossDied = false;
     gameover = false;
     space = 0;
+    gameEnded = false;
 
     constructor(canvas,keyboard){
         this.ctx = canvas.getContext('2d');
@@ -26,8 +29,8 @@ class World{
         this.keyboard = keyboard
         this.setWorld();
         this.draw();
-        //this.run();
-        this.checkForRunning();
+        setStopableInterval(this.checkForRunning, 100);
+        setStopableInterval(this.checkBottleHit, 1200);
     }  
     
 
@@ -40,12 +43,10 @@ class World{
             }
     }
 
-    checkForRunning(){
-        setInterval(() => {
+    checkForRunning = () => {
             if(this.gamestart){
                 this.run();
             }
-        },100)
     }
 
     setWorld(){
@@ -58,9 +59,10 @@ class World{
             this.collectBottles();
             this.checkThrowObjects();
             this.jumpOnEnemies();
-            this.checkDead();
+            this.checkDeadOfCharacter();
             this.checkForEndbossAttack();
             this.checkBottleHit();
+            this.checkDeadOfEndboss();
     }
 
     jumpOnEnemies(){
@@ -79,8 +81,9 @@ class World{
         this.space = this.level.enemies[this.level.enemies.length -1].x - this.character.x 
     } 
 
-    checkBottleHit(){
-        setInterval(() => {
+    checkBottleHit = () => {
+
+        if(this.gamestart){
             this.level.enemies.forEach((enemy) => {
                 if(this.bottle.isColliding(enemy)){
                     enemy.hit();
@@ -88,17 +91,23 @@ class World{
                     this.bottle.trow(0,2,this.bottle.IMAGES_SPLASH);
                 }
             })
-        },1200)
+        }
 
     }
 
-    checkDead(){
+    checkDeadOfCharacter(){
 
         if(this.character.isDead()){
+            this.characterDied = true;
             for (let i = 0; i < this.character.IMAGES_DEATH.length; i++) {
                 this.character.playAnimation(this.character.IMAGES_DEATH);
             }
-           
+        }
+    }
+
+    checkDeadOfEndboss(){
+        if(this.level.enemies[this.level.enemies.length -1].isDead()){
+            this.endbossDied = true;
         }
     }
 
@@ -147,16 +156,6 @@ class World{
             }
         }
     }
-    clearAllIntervals() {
-        setTimeout(() => {
-            for (let i = 1; i < 9999; i++){
-                window.clearInterval(i);
-
-            }
-        },500)
-    }
-    
-
     
     draw(){
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -173,21 +172,21 @@ class World{
                 this.addObjectsToMap(this.level.bottles);
                 this.addToMap(this.character);
                 this.addObjectsToMap(this.throwableObject);
+
                
-                if(this.character.isDead()){
+                if(this.characterDied){
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/oh no you lost!.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
-                    this.gameover = true;
-                    this.clearAllIntervals();
+                    stopGame();
                     showRestartBtn();
+                    this.gameEnded = false;
                 }
-                if(this.level.enemies[this.level.enemies.length -1].isDead()){
+                if(this.endbossDied){
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
-                    this.gameover = true;
-                    this.clearAllIntervals();
+                    stopGame();
                     showRestartBtn();
-                }
+                }  
         
                 this.ctx.translate(-this.camera_x, 0);
                 this.addToMap(this.statusBar);

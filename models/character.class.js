@@ -103,9 +103,13 @@ class Character extends MovableObject{
     }
 
     animate(){
+        setStopableInterval(this.walking, 1000/60)
+        setStopableInterval(this.walkAnimation, 50)
+    }
 
-        //change position//
-        setInterval(() => {
+
+
+    walking = () => {
             this.walking_sound.pause();
 
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
@@ -122,28 +126,25 @@ class Character extends MovableObject{
                 this.walking_sound.play();
             }
 
-
             if(this.world.keyboard.SPACE && !this.isAboveGround()){
                 this.jump();
             }
 
             this.world.camera_x = -this.x +100;
-        },1000/60)
-
-    //jump, dead and walk animation
-
-        setInterval(() => {
-         if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            }else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            }else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-            }else if(this.checkSleeping()) {
-                this.playAnimation(this.IMAGES_SLEEPING);
-            }else if(this.checklastMove()){
-                this.playAnimation(this.IMAGES_IDLE);
-            }
-        },50)
     }
+
+    walkAnimation = () => {
+            if (this.isHurt()) {
+                   this.playAnimation(this.IMAGES_HURT);
+               }else if (this.isAboveGround()) {
+                   this.playAnimation(this.IMAGES_JUMPING);
+               }else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                       this.playAnimation(this.IMAGES_WALKING);
+               }else if(this.checkSleeping()) {
+                   this.playAnimation(this.IMAGES_SLEEPING);
+               }else if(this.checklastMove()){
+                   this.playAnimation(this.IMAGES_IDLE);
+               }
+    }
+
 }

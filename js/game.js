@@ -5,6 +5,8 @@ let keyboard = new Keyboard();
 let fullscreen = false;
 let game_song = new Audio('audio/gameSong.mp3');
 let soundIsRunning = false;
+let intervalIds = [];
+let i = 1;
 
 
 
@@ -26,13 +28,29 @@ function startTheGame(){
 
 function gameStart(){
    world.gamestart = true;
+   world.characterDied = false;
+   world.endbossDied = false;
 }
 
+function setStopableInterval(fn, time){
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
+}
+
+function stopGame(){
+    if(!world.gameEnded){
+        intervalIds.forEach(clearInterval);
+        world.gameEnded = true;
+    }
+}
 
 function restartTheGame(){
-    gameStart()
-    init();
+    gameStart();
+    document.getElementById('restartBtn').style = 'display: none;'
+    //document.getElementById('startBtn').style = 'display: flex;'
+    world = new World(canvas,keyboard);
     startTheGame();
+
 }
 
 function hideButton(){
@@ -91,23 +109,23 @@ function exitFullscreen() {
 
 window.addEventListener("keydown", (e) => {
 
-    if(e.keyCode == 39 && !(world.gameover)){
+    if(e.keyCode == 39 && !(world.gameEnded)){
 
         keyboard.RIGHT = true;
     }
-    if(e.keyCode == 37 && !(world.gameover)){
+    if(e.keyCode == 37 && !(world.gameEnded)){
         keyboard.LEFT = true;
     }
-    if(e.keyCode == 38 && !(world.gameover)){
+    if(e.keyCode == 38 && !(world.gameEnded)){
         keyboard.UP = true;
     }
-    if(e.keyCode == 40 && !(world.gameover)){
+    if(e.keyCode == 40 && !(world.gameEnded)){
         keyboard.DOWN = true;
     }
-    if(e.keyCode == 32 && !(world.gameover)){
+    if(e.keyCode == 32 && !(world.gameEnded)){
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 68 && !(world.gameover)){
+    if (e.keyCode == 68 && !(world.gameEnded)){
         keyboard.D = true;
     }
 });

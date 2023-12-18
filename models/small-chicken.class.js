@@ -25,20 +25,24 @@ class SmallChicken extends MovableObject {
     }
 
     animate(){
-        setInterval(() => {
-            this.moveleft();
-        },1000/60);
 
-        setInterval(()=> {
-            if (this.energy == 100) {
-                this.playAnimation(this.IMAGES_WALKING);
-            } else {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.speed = 0;
-                setInterval(() => {
-                    this.y += this.speedY;
-                })  
-            }
-        },200);
+        setStopableInterval(this.smallChickenMoves, 1000/60);
+        setStopableInterval(this.playChickenAnimation, 200);
+    }
+
+    smallChickenMoves = () => {
+        this.moveleft();
+    }
+
+    playChickenAnimation = () => {
+        if (this.energy == 100) {
+            this.playAnimation(this.IMAGES_WALKING);
+        } else {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.speed = 0;
+            setInterval(() => {
+                this.y += this.speedY;
+            })  
+        }
     }
 }
