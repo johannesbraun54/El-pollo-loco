@@ -9,14 +9,26 @@ body {
     align-items: center;
     background-image: url('img/5_background/canyon-7631482_1920.png');
     font-family:'zabars',Arial, Helvetica, sans-serif;
-  
+    margin: 0px;
+}
+
+h1{
+    font-size: 56px;
+    letter-spacing: 3px;
+    text-shadow: 4px, 4px, 8px rgba(0,0,0, 0.5);
+}
+
+canvas {
+    background-color: black;
+    display: block;
 }
 
 .absolute{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 578px;
+    top: 554px;
+    width: 720px;
 }
 
 .absolute img{
@@ -50,7 +62,6 @@ button:active {
 }
 
 .gameStartBtn{
-    width: 720px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -86,16 +97,6 @@ button:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-h1{
-    font-size: 64px;
-    letter-spacing: 3px;
-    text-shadow: 4px, 4px, 8px rgba(0,0,0, 0.5);
-}
-
-canvas {
-    background-color: black;
-    display: block;
-}
 
 .description {
     display: flex;
@@ -112,15 +113,47 @@ canvas {
 
 @media only screen and (max-width: 720px){
     canvas{
-        width: 100%;
+        width: 100vw;
+    }
+    .absolute{
+        width: 100vw;
+        top: 73%;   
+        transform: translateY(-50%); /* Korrigiert die Positionierung, um den Container genau in der Mitte zu zentrieren */
+       
     }
 }
 
+@media only screen and (max-height: 675px){
+    h1 {
+        display: none;
+    }
+
+    .description{
+        display: none;
+    }
+
+    .absolute{
+        width: 100vw;
+        top: 73%;   
+        transform: translateY(-50%); /* Korrigiert die Positionierung, um den Container genau in der Mitte zu zentrieren */  
+    }
+}
+
+
 @media only screen and (max-height: 480px){
     canvas{
-        width: 100%;
+        width: 100vw;
         height: 100vh;
     }
+
+    .absolute{
+        width: 100vw; 
+    }
+
+    .description{
+        display: none;
+    }
+
     .mobileKey{
         display: flex;
     }

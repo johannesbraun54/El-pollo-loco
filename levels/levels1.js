@@ -17,6 +17,9 @@ function initLevel(){
             new Coins(),
             new Coins(),
             new Coins(),
+            new Coins(),
+            new Coins(),
+            new Coins(),
         ],
     
         [

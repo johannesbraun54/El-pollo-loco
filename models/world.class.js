@@ -22,6 +22,10 @@ class World{
     gameover = false;
     space = 0;
     gameEnded = false;
+    collectBottle_sound = new Audio('audio/collectBottle.mp3');
+    smashedBottle_sound = new Audio('audio/smashedBottle.mp3');
+    collectedCoin_sound = new Audio('audio/collectCoin.mp3');
+    winGame_sound = new Audio('audio/winGame.mp3');
 
     constructor(canvas,keyboard){
         this.ctx = canvas.getContext('2d');
@@ -87,6 +91,8 @@ class World{
             this.level.enemies.forEach((enemy) => {
                 if(this.bottle.isColliding(enemy)){
                     enemy.hit();
+                    this.smashedBottle_sound.play();
+                    //this.hurtEndboss_sound.play();
                     this.statusBarEndboss.setPercentage(enemy.energy)
                     this.bottle.trow(0,2,this.bottle.IMAGES_SPLASH);
                 }
@@ -137,6 +143,7 @@ class World{
         for (let i = 0; i < this.level.coins.length; i++) {
             const coin = this.level.coins[i];  
             if (this.character.isColliding(coin)) {
+                this.collectedCoin_sound.play();
                 this.level.coins.splice(i, 1); 
                 this.collectedCoins.push(coin);
                 this.statusBarCoin.setPercentage(this.collectedCoins.length);
@@ -150,6 +157,7 @@ class World{
             const collectedbottle = this.level.bottles[i];  
             if (this.character.isColliding(collectedbottle)) {
                 this.level.bottles.splice(i, 1); // flasche wird nicht mehr angezeigt
+                this.collectBottle_sound.play();
                 this.useableBottle++;
                 console.log('useableBottle:', this.useableBottle);
                 this.statusBarBottle.setPercentage(this.useableBottle);
@@ -184,7 +192,10 @@ class World{
                 if(this.endbossDied){
                     this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png',this.character.x - 100);
                     this.addToMap(this.endscreen);
-                    stopGame();
+                    setTimeout(() => {
+                        stopGame();
+                    },1000)
+                    !this.gameEnded ? this.winGame_sound.play() : '';
                     showRestartBtn();
                 }  
         

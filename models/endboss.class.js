@@ -5,6 +5,9 @@ class Endboss extends MovableObject{
     y = -45;
     isWalking = true;
     startPosition_x = 2500
+    hurtedEndboss_sound = new Audio('audio/hurtBoss.mp3');
+    deadEndboss_sound = new Audio('audio/deadEndboss.mp3');
+
 
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -73,9 +76,12 @@ class Endboss extends MovableObject{
     playEndbossAnimation = () => {
         if(this.isHurt()){
             this.playAnimation(this.IMAGES_HURT);
+            this.hurtedEndboss_sound.play();
     } else if(this.isDead()){
+        
         this.playAnimation(this.IMAGES_DEAD);
-        this.y += 15;
+        this.y += 50;
+        this.deadEndboss_sound.play();
     } else if(this.startPosition_x > this.x){
         this.playAnimation(this.IMAGES_WALKING);
         if(world.space < 100){
