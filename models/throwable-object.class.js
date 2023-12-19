@@ -43,14 +43,15 @@ class ThrowableObject extends MovableObject{
         if(BottleImg != undefined){
             this.trow(speedX,speedY,BottleImg);
         }
-
     }
 
-
-
+    /**
+     * trows the bottle
+     * @param {integer} speedX 
+     * @param {integer} speedY 
+     * @param {array} BottleImg 
+     */
     trow(speedX, speedY, BottleImg){
-       // console.log('BottleImg:', BottleImg);
-
         this.speedY = speedY;
         this.applyGravity();
         setInterval(() => {

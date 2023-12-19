@@ -1,5 +1,7 @@
 let level1;
-
+/**
+ * the variable "level1 gets its value"
+ */
 function initLevel(){
     
      level1 = new Level(

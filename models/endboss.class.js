@@ -64,32 +64,40 @@ class Endboss extends MovableObject{
         this.animate();
     }
 
+    /**
+     * calls the intervals for endboss 
+     */
     animate(){
        setStopableInterval(this.endbossMoves, 10);
        setStopableInterval(this.playEndbossAnimation, 300);
     }
 
+    /**
+     * moves the endboss
+     */
     endbossMoves = () => {
         this.moveleft();
     }
 
+    /**
+     * plays the endboss amimation
+     */
     playEndbossAnimation = () => {
-        if(this.isHurt()){
-            this.playAnimation(this.IMAGES_HURT);
-            this.hurtedEndboss_sound.play();
-    } else if(this.isDead()){
-        
-        this.playAnimation(this.IMAGES_DEAD);
-        this.y += 50;
-        this.deadEndboss_sound.play();
-    } else if(this.startPosition_x > this.x){
-        this.playAnimation(this.IMAGES_WALKING);
-        if(world.space < 100){
-            this.playAnimation(this.IMAGES_ATTACK);
+            if(this.isHurt()){
+                this.playAnimation(this.IMAGES_HURT);
+                this.hurtedEndboss_sound.play();
+        } else if(this.isDead()){
+            this.playAnimation(this.IMAGES_DEAD);
+            this.y += 50;
+            this.deadEndboss_sound.play();
+        } else if(this.startPosition_x > this.x){
+            this.playAnimation(this.IMAGES_WALKING);
+            if(world.space < 100){
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
+        } else {
+                this.playAnimation(this.IMAGES_ALERT);
         }
-    } else {
-            this.playAnimation(this.IMAGES_ALERT);
-    }
     } 
 
 }

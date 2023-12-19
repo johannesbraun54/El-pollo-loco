@@ -88,53 +88,62 @@ class Character extends MovableObject{
         this.animate();
     }
 
+    /**
+     * sets the value of the variable "lastMove"
+     */
     getLastMove(){
         this.lastMove = new Date().getTime();
     }
 
+    /**
+     * calculates the value for "timepassed" 
+     * @returns  accordingly true or false
+     */
     checklastMove(){
         let timepassed = new Date().getTime() - this.lastMove;
         timepassed = timepassed / 1000;
         return timepassed > 2
     }
 
+    /**
+     * calculates the value for "timepassed" 
+     * @returns  accordingly true or false
+     */
     checkSleeping(){
         let timepassed = new Date().getTime() - this.lastMove;
         timepassed = timepassed / 1000;
         return timepassed > 4
     }
 
+    /**
+     * calls the intervalfunction 
+     */
     animate(){
         setStopableInterval(this.walking, 1000/60)
         setStopableInterval(this.walkAnimation, 50)
     }
 
-
-
+    /**
+     * checks the condition and calls the right function for moving the character
+     */
     walking = () => {
             this.walking_sound.pause();
 
-            if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
-                this.moveRight();
-                this.otherDirection = false;
-                this.getLastMove();
-                this.walking_sound.play();
-            }
+            if(this.world.keyboard.RIGHT && this.worldRightEnd())
+                this.moveCharacterRight();
+            
+            if(this.world.keyboard.LEFT && this.worldLeftEnd())
+                this.moveCharacterLeft();
 
-            if(this.world.keyboard.LEFT && this.x > 0){
-                this.moveleft();
-                this.otherDirection = true;
-                this.getLastMove();
-                this.walking_sound.play();
-            }
-
-            if(this.world.keyboard.SPACE && !this.isAboveGround()){
+            if(this.world.keyboard.SPACE && !this.isAboveGround())
                 this.jump();
-            }
 
             this.world.camera_x = -this.x +100;
     }
 
+    /**
+     * checks the condition and calls the right function for play the right animation at the character
+     */
     walkAnimation = () => {
             if (this.isHurt()) {
                    this.playAnimation(this.IMAGES_HURT);
@@ -148,6 +157,38 @@ class Character extends MovableObject{
                }else if(this.checklastMove()){
                    this.playAnimation(this.IMAGES_IDLE);
                }
+    }
+    /**
+     * moves the character right
+     */
+    moveCharacterRight(){
+        this.moveRight();
+        this.otherDirection = false;
+        this.getLastMove();
+        this.walking_sound.play();
+    }
+
+    /**
+     * moves the character left
+     */
+    moveCharacterLeft(){
+        this.moveleft();
+        this.otherDirection = true;
+        this.getLastMove();
+        this.walking_sound.play();
+    }
+    /**
+     * @returns the right end from the world
+     */
+    worldRightEnd(){
+        return this.x < this.world.level.level_end_x
+    }
+
+    /**
+     * @returns the left end from the world
+     */
+    worldLeftEnd(){
+       return this.x > 0
     }
 
 }

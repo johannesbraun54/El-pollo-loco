@@ -18,13 +18,20 @@ class StatusBarBottle extends DrawableObject{
         this.setPercentage(0);
     }
 
-    //setPercentage(50)
+    /**
+     * gets the current progress for the status bar and shows the right picture
+     * @param {integer} percentage 
+     */
     setPercentage(percentage){
         this.percentage = percentage; 
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
     
+    /**
+     * 
+     * @returns the right value for getting the right index from the img array
+     */
     resolveImageIndex(){
         if (this.percentage == 5){
             return 5

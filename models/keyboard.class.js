@@ -9,6 +9,4 @@ class Keyboard{
     constructor(){
 
     }
-
-    
 }

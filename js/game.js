@@ -9,58 +9,43 @@ let intervalIds = [];
 let i = 1;
 
 
-
+/**
+ * loads the page
+ */
 function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas,keyboard);
 }
 
+/**
+ * starts the game on click
+ */
 function startTheGame(){
     gameStart();
     world.checkForGameStart();
     hideButton();
- if(soundIsRunning != false){
-    game_song.play();
-    soundIsRunning = true;
- }
+    steerSound();
 }
 
-
+/**
+ * is setting the right booleans for gamestart
+ */
 function gameStart(){
    world.gamestart = true;
    world.characterDied = false;
    world.endbossDied = false;
 }
 
-function setStopableInterval(fn, time){
-    let id = setInterval(fn, time);
-    intervalIds.push(id);
-}
-
-function stopGame(){
-    if(!world.gameEnded){
-        intervalIds.forEach(clearInterval);
-        world.gameEnded = true;
-    }
-}
-
-function restartTheGame(){
-    gameStart();
-    document.getElementById('restartBtn').style = 'display: none;'
-    //document.getElementById('startBtn').style = 'display: flex;'
-    world = new World(canvas,keyboard);
-    startTheGame();
-
-}
-
+/**
+ * hides the start button
+ */
 function hideButton(){
     document.getElementById('startBtn').style = 'display: none;'
 }
 
-function showRestartBtn(){
-    document.getElementById('restartBtn').style = 'display: flex;'
-}
-
+/**
+ * steers the sound for the game
+ */
 function steerSound(){
     if(soundIsRunning){
         game_song.pause();
@@ -73,6 +58,46 @@ function steerSound(){
     }
 }
 
+/**
+ * sets intervall for current function and pushs the id from it into the array "intervalIds"
+ * @param {function} fn 
+ * @param {Integer} time 
+ */
+function setStopableInterval(fn, time){
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
+}
+
+/**
+ * stops the game by clearing all intervalls from the array "intervalIds"
+ */
+function stopGame(){
+    if(!world.gameEnded){
+        intervalIds.forEach(clearInterval);
+        world.gameEnded = true;
+    }
+}
+
+/**
+ * if the game is stopped, this function starts a new match
+ */
+function restartTheGame(){
+    gameStart();
+    document.getElementById('restartBtn').style = 'display: none;'
+    world = new World(canvas,keyboard);
+    startTheGame();
+}
+
+/**
+ * shows the button for starting an new match
+ */
+function showRestartBtn(){
+    document.getElementById('restartBtn').style = 'display: flex;'
+}
+
+/**
+ * checks fullscreen status and shows the right icon
+ */
 function becomeFullscreen(){
     let fullscreenDiv = document.getElementById('fullscreen')
     if(fullscreen){
@@ -85,6 +110,11 @@ function becomeFullscreen(){
     
 }
 
+
+/**
+ * starts fullscreen 
+ * @param {string} element 
+ */
 function enterFullscreen(element) {
     if(element.requestFullscreen) {
       element.requestFullscreen();
@@ -96,6 +126,9 @@ function enterFullscreen(element) {
     fullscreen = true;
 }
 
+/**
+ * beends the fullscreen mode onclick
+ */
 function exitFullscreen() {
     if(document.exitFullscreen) {
       document.exitFullscreen();
@@ -105,7 +138,6 @@ function exitFullscreen() {
     fullscreen = false;
   }
   
-
 
 window.addEventListener("keydown", (e) => {
 
@@ -151,7 +183,9 @@ window.addEventListener("keyup", (e) => {
     }
 });
 
- 
+/**
+ * listens for touchevents to steer the mobile game
+ */ 
 function moveOnMobile(){
     document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
         e.preventDefault();

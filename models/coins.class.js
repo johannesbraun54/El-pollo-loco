@@ -3,24 +3,32 @@ class Coins extends MovableObject {
     height = 50;
     width = 50;
 
-    IMAGES_WALKING = [
+    IMAGES_MOVING = [
         'img/8_coin/coin_1.png',
         'img/8_coin/coin_2.png'
     ]
 
 
     constructor(){
-        super().loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_WALKING);
-        this.x = Math.random()* 5000;
+        super().loadImage(this.IMAGES_MOVING[0]);
+        this.loadImages(this.IMAGES_MOVING);
+        this.x = Math.random()* 2000;
         this.y = 100 + Math.random()* 100;
         this.animate();
     }
 
+    /**
+     * animates the coin
+     */
     animate(){
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        },500)
+        setStopableInterval(this.moveCoin, 500)
+    }
+
+    /**
+     * moves the coin
+     */
+    moveCoin = () => {
+        this.playAnimation(this.IMAGES_MOVING);
     }
 }
 

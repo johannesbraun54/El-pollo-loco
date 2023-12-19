@@ -28,17 +28,24 @@ class Chicken extends MovableObject{
             this.animate();
             }
 
+    /**
+     * calls the animations for the
+     */
     animate(){
-
         setStopableInterval(this.chickenMovesLeft, 1000/60);
         setStopableInterval(this.checkChickenAnimation, 200);
-
     }
 
+    /**
+     * moves the chicken to the left side
+     */ 
     chickenMovesLeft = () => {
         this.moveleft();
     }
 
+    /**
+     * checks the values from the chicken to get the accordingly animation
+     */
     checkChickenAnimation = () => {
         if (this.energy == 100) {
             this.playAnimation(this.IMAGES_WALKING);
@@ -47,12 +54,14 @@ class Chicken extends MovableObject{
             this.speed = 0;
             setInterval(() => {
                 this.y += this.speedY;
-                this.playChickenSound()
+                this.playChickenSound();
             })  
-
         }
     }
 
+    /**
+     * plays the sound if chicken dies
+     */
     playChickenSound(){
         if(this.playSound){
             this.chicken_sound.play();

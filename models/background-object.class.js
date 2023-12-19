@@ -1,3 +1,6 @@
+/**
+ * defines the Backgroundobject
+ */
 class BackgroundObject extends MovableObject{
 
     width = 720;

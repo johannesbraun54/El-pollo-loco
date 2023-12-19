@@ -17,7 +17,6 @@ class SmallChicken extends MovableObject {
 
     chicken_sound = new Audio('audio/chicken.mp3');
 
-
     constructor(){
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png')
         this.x = 200 + Math.random()*2200;
@@ -27,16 +26,24 @@ class SmallChicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * calls the intervall function
+     */
     animate(){
-
         setStopableInterval(this.smallChickenMoves, 1000/60);
         setStopableInterval(this.playChickenAnimation, 200);
     }
 
+    /**
+     * moves the chicken left
+     */
     smallChickenMoves = () => {
         this.moveleft();
     }
 
+    /**
+     * plays the animation for the smal chickens
+     */
     playChickenAnimation = () => {
         if (this.energy == 100) {
             this.playAnimation(this.IMAGES_WALKING);
@@ -49,7 +56,9 @@ class SmallChicken extends MovableObject {
             })  
         }
     }
-
+/**
+ * plays the sound for chickens
+ */
     playChickenSound(){
         if(this.playSound){
             this.chicken_sound.play();

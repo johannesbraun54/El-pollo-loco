@@ -17,10 +17,16 @@ class Bottle extends MovableObject{
         this.animate();
     }
 
+    /**
+     * gets the current picture for playing the animation
+     */
     animate(){
         setStopableInterval(this.standingBottle, 500)
     }
 
+    /**
+     * calls the function "playAnimation" for changen the images for playing the animation
+     */
     standingBottle = () => {
             this.playAnimation(this.IMAGES_ONGROUND)
     }
