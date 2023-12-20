@@ -185,7 +185,7 @@ class World{
     /**
      * checks if the character collected bottles
      */
-    collectBottles() {
+    collectBottles(){
 
         for (let i = 0; i < this.level.bottles.length; i++) {
             const collectedbottle = this.level.bottles[i];  
@@ -198,6 +198,13 @@ class World{
             }
         }
     }
+
+    /*checkFullscreenShortcut(){
+        let fullscreenDiv = document.getElementById('fullscreen');
+        if (this.keyboard.F){
+            enterFullscreen(fullscreenDiv);
+        }
+    }*/
     /**
      * draws the world
      */

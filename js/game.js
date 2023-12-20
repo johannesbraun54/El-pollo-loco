@@ -99,7 +99,7 @@ function showRestartBtn(){
  * checks fullscreen status and shows the right icon
  */
 function becomeFullscreen(){
-    let fullscreenDiv = document.getElementById('fullscreen')
+    let fullscreenDiv = document.getElementById('canvas')
     if(fullscreen){
         exitFullscreen(fullscreenDiv);
         document.getElementById('fullscreenIcon').src = 'img/9_intro_outro_screens/fullscreen.svg';
@@ -126,6 +126,17 @@ function enterFullscreen(element) {
     fullscreen = true;
 }
 
+function checkFullscreenShortcut(){
+    let fullscreenDiv = document.getElementById('canvas');
+    setInterval(() => {
+        if (keyboard.F){
+            enterFullscreen(fullscreenDiv);
+            fullscreenDiv.classList.add('canvasFullscreen')
+        }
+    },100)
+
+}
+
 /**
  * beends the fullscreen mode onclick
  */
@@ -142,7 +153,6 @@ function exitFullscreen() {
 window.addEventListener("keydown", (e) => {
 
     if(e.keyCode == 39 && !(world.gameEnded)){
-
         keyboard.RIGHT = true;
     }
     if(e.keyCode == 37 && !(world.gameEnded)){
@@ -159,6 +169,13 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.keyCode == 68 && !(world.gameEnded)){
         keyboard.D = true;
+    }
+    if (e.keyCode == 70){
+        keyboard.F = true;
+        checkFullscreenShortcut();
+    }
+    if (e.keyCode === 27){
+        keyboard.ESC = true;
     }
 });
 
@@ -181,6 +198,12 @@ window.addEventListener("keyup", (e) => {
     if (e.keyCode == 68){
         keyboard.D = false;
     }
+    if (e.keyCode === 70){
+        keyboard.F = false;
+    }
+    if (e.keyCode === 27){
+        keyboard.ESC = false;
+    }    
 });
 
 /**
