@@ -7,6 +7,13 @@ class Endboss extends MovableObject{
     startPosition_x = 2500
     hurtedEndboss_sound = new Audio('audio/hurtBoss.mp3');
     deadEndboss_sound = new Audio('audio/deadEndboss.mp3');
+    offset = {
+        top: 0,
+        left: 50,
+        right: 30,
+        bottom: 10,
+    };
+    playEndSound = true;
 
 
     IMAGES_WALKING = [
@@ -69,7 +76,11 @@ class Endboss extends MovableObject{
      */
     animate(){
        setStopableInterval(this.endbossMoves, 10);
-       setStopableInterval(this.playEndbossAnimation, 300);
+       
+       let id = setInterval(() => {
+        this.playEndbossAnimation();
+        this.endbossIsDead();
+       },300);  
     }
 
     /**
@@ -82,22 +93,36 @@ class Endboss extends MovableObject{
     /**
      * plays the endboss amimation
      */
-    playEndbossAnimation = () => {
+    playEndbossAnimation(){
             if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
                 this.hurtedEndboss_sound.play();
-        } else if(this.isDead()){
-            this.playAnimation(this.IMAGES_DEAD);
-            this.y += 50;
-            this.deadEndboss_sound.play();
         } else if(this.startPosition_x > this.x){
             this.playAnimation(this.IMAGES_WALKING);
             if(world.space < 100){
                 this.playAnimation(this.IMAGES_ATTACK);
             }
+        }else if(this.isDead()){
+            this.deadEndboss_sound.play();
+            this.playAnimation(this.IMAGES_DEAD);
+            this.y += 50;
         } else {
                 this.playAnimation(this.IMAGES_ALERT);
         }
     } 
+
+    /**
+     * animates the dead endboss
+     */
+    endbossIsDead(){
+        if(this.isDead()){
+            if(this.playEndSound){
+                this.deadEndboss_sound.play();
+            }
+            this.playAnimation(this.IMAGES_DEAD);
+            this.y += 50;
+            this.playEndSound = false;
+        }
+    }
 
 }

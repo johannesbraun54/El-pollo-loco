@@ -3,6 +3,12 @@ class Bottle extends MovableObject{
     height = 60;
     width = 60;
     y = 365;
+    offset = {
+        top: 10,
+        left: 10,
+        right: 10,
+        bottom: 10,
+    };
 
 
     IMAGES_ONGROUND = [

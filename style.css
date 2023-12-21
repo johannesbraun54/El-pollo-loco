@@ -24,20 +24,31 @@ canvas {
 }
 
 .canvasFullscreen{
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
 }
 
 .absolute{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 554px;
-    width: 720px;
+    top: 78%;
+    width: 700px;
+}
+
+.absoluteFullscreen{
+    top: 90%;
+    width: 90%;
+}
+
+.canvasFullscreen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 .absolute img{
@@ -127,12 +138,26 @@ button:active {
     .absolute{
         width: 100vw;
         top: 73%;   
-        transform: translateY(-50%); /* Korrigiert die Positionierung, um den Container genau in der Mitte zu zentrieren */
+        transform: translateY(-50%); 
        
     }
 }
 
-@media only screen and (max-height: 675px){
+@media only screen and (max-width: 600px){
+    .absolute{
+        width: 100vw;
+        top: 60%;   
+    }
+}
+
+@media only screen and (max-width: 474px){
+    .absolute{
+        width: 100vw;
+        top: 50%;   
+    }
+}
+
+@media only screen and (max-height: 600px){
     h1 {
         display: none;
     }
@@ -143,8 +168,7 @@ button:active {
 
     .absolute{
         width: 100vw;
-        top: 73%;   
-        transform: translateY(-50%); /* Korrigiert die Positionierung, um den Container genau in der Mitte zu zentrieren */  
+        top: 80%;   
     }
 }
 
@@ -168,7 +192,7 @@ button:active {
     }
 
     .absolute{
-        top: 390px;
+        top: 90%;
     }
 
     h1 {

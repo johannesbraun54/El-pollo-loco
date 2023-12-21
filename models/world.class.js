@@ -26,6 +26,8 @@ class World{
     smashedBottle_sound = new Audio('audio/smashedBottle.mp3');
     collectedCoin_sound = new Audio('audio/collectCoin.mp3');
     winGame_sound = new Audio('audio/winGame.mp3');
+    bottlePercentage;
+    coinPercentage;
 
     constructor(canvas,keyboard){
         this.ctx = canvas.getContext('2d');
@@ -33,8 +35,8 @@ class World{
         this.keyboard = keyboard
         this.setWorld();
         this.draw();
-        setStopableInterval(this.checkForRunning, 100);
-        setStopableInterval(this.checkBottleHit, 1200);
+        setStopableInterval(this.checkForRunning, 50);
+        setStopableInterval(this.checkBottleHit, 200);
     }  
     
     /**
@@ -78,6 +80,8 @@ class World{
             this.checkForEndbossAttack();
             this.checkBottleHit();
             this.checkDeadOfEndboss();
+            this.character.isJumped();
+            this.character.onGroundAgain();
     }
     /**
      * checks if the character is jumped on the enemies
@@ -86,10 +90,10 @@ class World{
 
         for (let i = 0; i < this.level.enemies.length -1; i++) {
             const enemy = this.level.enemies[i];
-            if (this.character.isColliding(enemy) && this.character.isAboveGround()){
-                this.character.jump();
-                enemy.energy -= 100;
-            }
+                if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.isNotHurt() && this.character.isJumped()) {
+                        this.character.jump();
+                        enemy.energy -= 100;
+                }
         }
     }
 
@@ -143,13 +147,13 @@ class World{
      * checks if a bottle is throwed
      */
     checkThrowObjects(){
- 
         if (this.keyboard.D && this.useableBottle != 0) { 
             this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, 30, 30,this.bottle.IMAGES_FLYINGBOTTLE);
             this.throwableObject.push(this.bottle);
             this.useableBottle--;
-            console.log('useablebottles:', this.useableBottle)
-            this.statusBarBottle.setPercentage(this.useableBottle);
+            this.bottlePercentage = this.useableBottle * 20;
+            this.statusBarBottle.setPercentage(this.bottlePercentage);
+            this.keyboard.D = false;
         }
     }
 
@@ -177,7 +181,8 @@ class World{
                 this.collectedCoin_sound.play();
                 this.level.coins.splice(i, 1); 
                 this.collectedCoins.push(coin);
-                this.statusBarCoin.setPercentage(this.collectedCoins.length);
+                this.coinPercentage = this.collectedCoins.length * 20;
+                this.statusBarCoin.setPercentage(this.coinPercentage);
             }
         }
     }
@@ -193,18 +198,13 @@ class World{
                 this.level.bottles.splice(i, 1); // flasche wird nicht mehr angezeigt
                 this.collectBottle_sound.play();
                 this.useableBottle++;
-                console.log('useableBottle:', this.useableBottle);
-                this.statusBarBottle.setPercentage(this.useableBottle);
+                this.bottlePercentage = this.useableBottle * 20;
+                console.log(this.useableBottle);
+                this.statusBarBottle.setPercentage(this.bottlePercentage);
             }
         }
     }
 
-    /*checkFullscreenShortcut(){
-        let fullscreenDiv = document.getElementById('fullscreen');
-        if (this.keyboard.F){
-            enterFullscreen(fullscreenDiv);
-        }
-    }*/
     /**
      * draws the world
      */

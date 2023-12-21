@@ -99,17 +99,21 @@ function showRestartBtn(){
  * checks fullscreen status and shows the right icon
  */
 function becomeFullscreen(){
-    let fullscreenDiv = document.getElementById('canvas')
+    let fullscreenDiv = document.getElementById('fullscreen')
     if(fullscreen){
-        exitFullscreen(fullscreenDiv);
+        exitFullscreen();
+        document.getElementById('absolute').classList.remove('absoluteFullscreen');
+        document.getElementById('canvas').classList.remove('canvasFullscreen');
         document.getElementById('fullscreenIcon').src = 'img/9_intro_outro_screens/fullscreen.svg';
+        fullscreen = false;
     } else {
         enterFullscreen(fullscreenDiv);
         document.getElementById('fullscreenIcon').src = 'img/9_intro_outro_screens/exitFullscreen.png';
+        document.getElementById('absolute').classList.add('absoluteFullscreen');
+        document.getElementById('canvas').classList.add('canvasFullscreen');
+        fullscreen = true;
     }
-    
 }
-
 
 /**
  * starts fullscreen 
@@ -126,16 +130,6 @@ function enterFullscreen(element) {
     fullscreen = true;
 }
 
-function checkFullscreenShortcut(){
-    let fullscreenDiv = document.getElementById('canvas');
-    setInterval(() => {
-        if (keyboard.F){
-            enterFullscreen(fullscreenDiv);
-            fullscreenDiv.classList.add('canvasFullscreen')
-        }
-    },100)
-
-}
 
 /**
  * beends the fullscreen mode onclick
@@ -146,8 +140,11 @@ function exitFullscreen() {
     } else if(document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-    fullscreen = false;
   }
+
+  document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+});
   
 
 window.addEventListener("keydown", (e) => {
@@ -169,13 +166,6 @@ window.addEventListener("keydown", (e) => {
     }
     if (e.keyCode == 68 && !(world.gameEnded)){
         keyboard.D = true;
-    }
-    if (e.keyCode == 70){
-        keyboard.F = true;
-        checkFullscreenShortcut();
-    }
-    if (e.keyCode === 27){
-        keyboard.ESC = true;
     }
 });
 
@@ -200,10 +190,7 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode === 70){
         keyboard.F = false;
-    }
-    if (e.keyCode === 27){
-        keyboard.ESC = false;
-    }    
+    } 
 });
 
 /**

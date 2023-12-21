@@ -6,7 +6,15 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     lastJump = 0;
-    offsetY = 0;
+    thisJumped = false;
+
+
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 
     /**
      * calculates the gravity in the world
@@ -68,7 +76,7 @@ class MovableObject extends DrawableObject {
      * hits the object and reduces the energy
      */
     hit(){
-        this.energy -= 10;
+        this.energy -= 5;
         if(this.energy < 0){
             this.energy = 0;
         }else{
@@ -83,7 +91,37 @@ class MovableObject extends DrawableObject {
     isHurt(){
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000; 
-        return timepassed < 1;
+        return timepassed < 0.6;
+    }
+
+    /**
+     * 
+     * @returns the healty status  
+     */
+    isNotHurt(){
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000; 
+        return timepassed > 0.6;
+    }
+
+    /**
+     * 
+     * @returns the jump status
+     */
+    isJumped(){
+        if(this.y <= 10){
+            this.thisJumped = true;
+        }
+        return this.thisJumped
+    }
+
+    /**
+     * returns if the character is landed
+     */
+    onGroundAgain(){
+        if(this.y >= 150){
+            this.thisJumped = false;
+        }
     }
 
 
@@ -101,17 +139,11 @@ class MovableObject extends DrawableObject {
      * @returns true if collsion is happend
      */
     isColliding(mo){
-        return  this.x + this.width > mo.x && // kontrolle kollision character vorderkante mit enemy 
-                this.y  + this.height > mo.y && // kontrolle kollision Y-Achse
-                this.x < mo.x && this.y < mo.y + mo.height
+        return  this.x + this.width - this.offset.right > mo.x + mo.offset.left && // kontrolle kollision character vorderkante mit enemy 
+                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // kontrolle mit der kollision Y-Achse oberkante von enemy
+                this.x + this.offset.left < mo.x + mo.width - mo.offset.right && //kontrolle kollision character hinterkante mit enemy 
+                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom // kontrolle mit der kollision Y-Achse unterkante von enemy
     }
-
-    /*isColliding(mo) {
-        return  (this.X + this.width) >= mo.X && this.X <= (mo.X + mo.width) && 
-                (this.Y + this.offsetY + this.height) >= mo.Y &&
-                (this.Y + this.offsetY) <= (mo.Y + mo.height); 
-               // mo.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-    }*/
 
 
 }
