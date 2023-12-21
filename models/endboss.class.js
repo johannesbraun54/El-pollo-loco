@@ -12,8 +12,9 @@ class Endboss extends MovableObject{
         left: 50,
         right: 30,
         bottom: 10,
-    };
+    }; 
     playEndSound = true;
+    soundsAreNew = true;
 
 
     IMAGES_WALKING = [
@@ -69,6 +70,7 @@ class Endboss extends MovableObject{
         this.loadImages(this.IMAGES_WALKING);
         this.x  = 2400;
         this.animate();
+        this.playBossSounds();
     }
 
     /**
@@ -122,6 +124,14 @@ class Endboss extends MovableObject{
             this.playAnimation(this.IMAGES_DEAD);
             this.y += 50;
             this.playEndSound = false;
+        }
+    }
+
+    playBossSounds(){
+        if(this.soundsAreNew){
+            sounds.push(this.hurtedEndboss_sound);
+            sounds.push(this.deadEndboss_sound);
+            this.soundsAreNew = false;
         }
     }
 

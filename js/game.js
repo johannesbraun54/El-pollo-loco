@@ -6,7 +6,9 @@ let fullscreen = false;
 let game_song = new Audio('audio/gameSong.mp3');
 let soundIsRunning = false;
 let intervalIds = [];
+let sounds = [];
 let i = 1;
+let soundsAreNew = true;
 
 
 /**
@@ -25,6 +27,7 @@ function startTheGame(){
     world.checkForGameStart();
     hideButton();
     steerSound();
+    hideIconFullscreen();
 }
 
 /**
@@ -43,16 +46,28 @@ function hideButton(){
     document.getElementById('startBtn').style = 'display: none;'
 }
 
+function hideIconFullscreen(){
+    if(window.innerWidth < 480){
+        document.getElementById('fullscreenIcon').style = 'display: none;'
+    }
+}
+
 /**
  * steers the sound for the game
  */
 function steerSound(){
     if(soundIsRunning){
+        sounds.forEach(sound => {
+            sound.muted = true;
+        });
         game_song.pause();
         soundIsRunning = false;
         document.getElementById('soundON').src = 'img/9_intro_outro_screens/soundOFF.png';
     }else{
         game_song.play();
+        sounds.forEach(sound => {
+            sound.muted = false;
+        });
         soundIsRunning = true;
         document.getElementById('soundON').src = 'img/9_intro_outro_screens/soundOn.png';
     }

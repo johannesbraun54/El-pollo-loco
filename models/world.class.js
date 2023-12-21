@@ -26,6 +26,7 @@ class World{
     smashedBottle_sound = new Audio('audio/smashedBottle.mp3');
     collectedCoin_sound = new Audio('audio/collectCoin.mp3');
     winGame_sound = new Audio('audio/winGame.mp3');
+    soundsAreNew = true;
     bottlePercentage;
     coinPercentage;
 
@@ -48,6 +49,17 @@ class World{
             this.level = level1;
             this.level.enemies[4].energy= 100
             this.character.energy = 100
+            this.pushSoundInArray();
+        }
+    }
+
+    pushSoundInArray(){
+        if(this.soundsAreNew){
+            sounds.push(this.collectBottle_sound);
+            sounds.push(this.smashedBottle_sound);
+            sounds.push(this.collectedCoin_sound);
+            sounds.push(this.winGame_sound);
+            this.soundsAreNew = false;
         }
     }
 
@@ -199,7 +211,6 @@ class World{
                 this.collectBottle_sound.play();
                 this.useableBottle++;
                 this.bottlePercentage = this.useableBottle * 20;
-                console.log(this.useableBottle);
                 this.statusBarBottle.setPercentage(this.bottlePercentage);
             }
         }

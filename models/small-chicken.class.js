@@ -23,6 +23,7 @@ class SmallChicken extends MovableObject {
     };
 
     chicken_sound = new Audio('audio/chicken.mp3');
+    soundsAreNew = true;
 
     constructor(){
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png')
@@ -31,6 +32,7 @@ class SmallChicken extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.speed = 0.15 + Math.random() * 4
         this.animate();
+        this.pushSmallChickenSounds();
     }
 
     /**
@@ -72,4 +74,11 @@ class SmallChicken extends MovableObject {
             this.playSound = false;
         }
     }
+    pushSmallChickenSounds(){
+        if (this.soundsAreNew) {
+            sounds.push(this.chicken_sound);
+            this.soundsAreNew = false;
+        }
+    }
+    
 }

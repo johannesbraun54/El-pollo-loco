@@ -8,8 +8,9 @@ body {
     flex-direction: column;
     align-items: center;
     background-image: url('img/5_background/canyon-7631482_1920.png');
-    font-family:'zabars',Arial, Helvetica, sans-serif;
+    font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     margin: 0px;
+    overflow: hidden;
 }
 
 h1{
@@ -28,6 +29,14 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.control{
+    display: flex;
+}
+
+.control div {
+    padding: 8px;
 }
 
 .absolute{
@@ -192,7 +201,7 @@ button:active {
     }
 
     .absolute{
-        top: 90%;
+        top: 85%;
     }
 
     h1 {

@@ -80,6 +80,7 @@ class Character extends MovableObject{
     walking_sound = new Audio('audio/running.mp3');
     hurt_sound = new Audio('audio/hurt.wav');
     canJump = false;
+    soundsAreNew = true;
     
     constructor(){
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -92,6 +93,7 @@ class Character extends MovableObject{
         this.loadImages(this.IMAGES_SLEEPING);
         this.applyGravity();
         this.animate();
+        this.pushCharacterSoundsInArray()
     }
 
     /**
@@ -208,4 +210,12 @@ class Character extends MovableObject{
        return this.x > 0
     }
 
+    pushCharacterSoundsInArray(){
+        if(this.soundsAreNew){
+            sounds.push(this.walking_sound);
+            sounds.push(this.hurt_sound);
+            this.soundsAreNew = false;
+        }
+
+    }
 }
