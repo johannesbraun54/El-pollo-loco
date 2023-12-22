@@ -52,7 +52,9 @@ class World{
             this.pushSoundInArray();
         }
     }
-
+    /**
+     * pushs the current sound into the sounds Array
+    */
     pushSoundInArray(){
         if(this.soundsAreNew){
             sounds.push(this.collectBottle_sound);

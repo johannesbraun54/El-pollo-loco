@@ -210,6 +210,9 @@ class Character extends MovableObject{
        return this.x > 0
     }
 
+    /**
+    * pushs the current sound into the sounds Array
+    */
     pushCharacterSoundsInArray(){
         if(this.soundsAreNew){
             sounds.push(this.walking_sound);

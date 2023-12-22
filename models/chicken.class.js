@@ -77,6 +77,9 @@ class Chicken extends MovableObject{
         }
     }
 
+    /**
+    * pushs the current sound into the sounds Array
+    */
     pushChickenSounds(){
         if (this.soundsAreNew) {
             sounds.push(this.chicken_sound);

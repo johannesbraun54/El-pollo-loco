@@ -127,6 +127,9 @@ class Endboss extends MovableObject{
         }
     }
 
+ /**
+ * pushs the current sound into the sounds Array
+ */
     playBossSounds(){
         if(this.soundsAreNew){
             sounds.push(this.hurtedEndboss_sound);

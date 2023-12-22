@@ -28,6 +28,18 @@ function startTheGame(){
     hideButton();
     steerSound();
     hideIconFullscreen();
+    pushGameSoundInArray();
+    game_song.play();
+}
+
+/**
+ * pushs the current sound into the sounds Array
+ */
+function pushGameSoundInArray(){
+    if(soundsAreNew){
+        sounds.push(game_song);
+        soundsAreNew = false;
+    }
 }
 
 /**
@@ -57,14 +69,14 @@ function hideIconFullscreen(){
  */
 function steerSound(){
     if(soundIsRunning){
+        //game_song.pause();
         sounds.forEach(sound => {
             sound.muted = true;
         });
-        game_song.pause();
         soundIsRunning = false;
         document.getElementById('soundON').src = 'img/9_intro_outro_screens/soundOFF.png';
     }else{
-        game_song.play();
+        //game_song.play();
         sounds.forEach(sound => {
             sound.muted = false;
         });
@@ -212,41 +224,70 @@ window.addEventListener("keyup", (e) => {
  * listens for touchevents to steer the mobile game
  */ 
 function moveOnMobile(){
+
+    moveLeftOnMobile();
+    moveRightOnMobile();
+    jumpOnMobile();
+    throwBottleOnMobile();
+}
+
+/**
+ * listens for touchevents to steer the mobile game
+ */ 
+function moveLeftOnMobile(){
     document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         world.keyboard.LEFT = true;
     })
 
     document.getElementById('btnLeft').addEventListener('touchend', (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         world.keyboard.LEFT = false;
     })
+};
 
+/**
+ * listens for touchevents to steer the mobile game
+ */ 
+function moveRightOnMobile(){
     document.getElementById('btnRight').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         world.keyboard.RIGHT = true;
     })
 
     document.getElementById('btnRight').addEventListener('touchend', (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         world.keyboard.RIGHT = false;
     })
+};
 
+/**
+ * listens for touchevents to steer the mobile game
+ */ 
+function jumpOnMobile(){
     document.getElementById('btnJump').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         world.keyboard.SPACE = true;
     })
 
     document.getElementById('btnJump').addEventListener('touchend', (e) => {
+        if (e.cancelable) e.preventDefault();
         world.keyboard.SPACE = false;
     })
+}
 
+/**
+ * listens for touchevents to steer the mobile game
+ */ 
+function throwBottleOnMobile(){
     document.getElementById('throwBottle').addEventListener('touchstart', (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         world.keyboard.D = true;
     })
 
     document.getElementById('throwBottle').addEventListener('touchend', (e) => {
+        if (e.cancelable) e.preventDefault();
         world.keyboard.D = false;
     })
 }
+

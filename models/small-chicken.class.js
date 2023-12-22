@@ -74,6 +74,10 @@ class SmallChicken extends MovableObject {
             this.playSound = false;
         }
     }
+
+/**
+ * pushs the current sound into the sounds Array
+ */
     pushSmallChickenSounds(){
         if (this.soundsAreNew) {
             sounds.push(this.chicken_sound);

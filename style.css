@@ -10,7 +10,6 @@ body {
     background-image: url('img/5_background/canyon-7631482_1920.png');
     font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     margin: 0px;
-    overflow: hidden;
 }
 
 h1{
@@ -35,16 +34,16 @@ canvas {
     display: flex;
 }
 
-.control div {
-    padding: 8px;
-}
-
 .absolute{
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 78%;
+    top: 75%;
     width: 700px;
+}
+
+.alert{
+ display: none;
 }
 
 .absoluteFullscreen{
@@ -58,6 +57,11 @@ canvas {
     left: 0;
     width: 100vw;
     height: 100vh;
+}
+
+.emptyDiv{
+    height: 40px;
+    width: 40px;
 }
 
 .absolute img{
@@ -119,6 +123,8 @@ button:active {
     transition: box-shadow 0.3s;
     justify-content: center;
     align-items: center;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 .mobileKey:active{
@@ -150,6 +156,7 @@ button:active {
         transform: translateY(-50%); 
        
     }
+
 }
 
 @media only screen and (max-width: 600px){
@@ -159,10 +166,28 @@ button:active {
     }
 }
 
+
 @media only screen and (max-width: 474px){
     .absolute{
         width: 100vw;
         top: 50%;   
+    }
+
+    .alert{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        text-align: center;
     }
 }
 
@@ -183,9 +208,21 @@ button:active {
 
 
 @media only screen and (max-height: 480px){
+
+    body {
+        overflow: hidden;
+    }
     canvas{
         width: 100vw;
         height: 100vh;
+    }
+
+    .alert{
+        display: none;
+    }
+
+    .fullscreenIcon{
+        display: none;
     }
 
     .absolute{
@@ -201,7 +238,7 @@ button:active {
     }
 
     .absolute{
-        top: 85%;
+        top: 80%;
     }
 
     h1 {
