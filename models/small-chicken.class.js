@@ -1,7 +1,7 @@
 class SmallChicken extends MovableObject {
 
     y = 350;
-    speedY = 0.5;
+    speedY = 1.5;
     height = 80;
     width = 60;
     playSound = true;
@@ -41,6 +41,7 @@ class SmallChicken extends MovableObject {
     animate(){
         setStopableInterval(this.smallChickenMoves, 1000/60);
         setStopableInterval(this.playChickenAnimation, 200);
+        setStopableInterval(this.showDeadSmallChicken, 1000/60);
     }
 
     /**
@@ -56,13 +57,15 @@ class SmallChicken extends MovableObject {
     playChickenAnimation = () => {
         if (this.energy == 100) {
             this.playAnimation(this.IMAGES_WALKING);
-        } else {
+        }
+    }
+
+    showDeadSmallChicken = () => {
+        if(this.energy < 100 && this.y < 500){
             this.playAnimation(this.IMAGES_DEAD);
             this.speed = 0;
-            setInterval(() => {
-                this.playChickenSound();
-                this.y += this.speedY;
-            })  
+            this.playChickenSound();
+            this.y += this.speedY;
         }
     }
 /**
