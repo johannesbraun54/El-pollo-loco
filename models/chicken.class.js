@@ -1,7 +1,7 @@
 class Chicken extends MovableObject{
 
     y = 350;
-    speedY = 1.5;
+    speedY = 3.5;
     height = 80;
     width = 60;
     playSound = true;

@@ -191,8 +191,12 @@ window.addEventListener("keydown", (e) => {
     if(e.keyCode == 32 && !(world.gameEnded)){
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 68 && !(world.gameEnded)){
+    if (e.keyCode == 68 && !(world.gameEnded) && !(world.throwLock)){
+        world.throwLock = true;
         keyboard.D = true;
+        setTimeout(()=>{
+            world.throwLock = false;
+        },400);
     }
 });
 
