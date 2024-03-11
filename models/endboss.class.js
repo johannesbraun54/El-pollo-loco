@@ -78,7 +78,7 @@ class Endboss extends MovableObject {
      */
     animate() {
         setStopableInterval(this.endbossMoves, 10);
-        setStopableInterval(this.animateEndboss, 300)
+        setStopableInterval(this.animateEndboss, 200)
     }
 
     animateEndboss = () => {

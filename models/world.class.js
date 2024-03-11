@@ -38,7 +38,7 @@ class World {
         this.setWorld();
         this.draw();
         setStopableInterval(this.checkForRunning, 50);
-        setStopableInterval(this.checkBottleHit, 200);
+        setStopableInterval(this.checkBottleHit, 100);
     }
 
     /**

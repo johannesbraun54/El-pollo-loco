@@ -10,6 +10,8 @@ body {
     background-image: url('img/5_background/canyon-7631482_1920.png');
     font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
     margin: 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 h1{
