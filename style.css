@@ -12,17 +12,38 @@ body {
     margin: 0px;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
-h1{
-    font-size: 56px;
-    letter-spacing: 3px;
-    text-shadow: 4px, 4px, 8px rgba(0,0,0, 0.5);
+.description {
+    margin-top: 48px;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 720px;
+    height: 64px;
+}
+
+.description-icon {
+    width: 20%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #b05b22;
+    border-radius: 8px;
+}
+
+.description-icon img {
+    height: 32px;
 }
 
 canvas {
     background-color: black;
     display: block;
+    border-radius: 8px;
+    margin-bottom: 48px;
 }
 
 .canvasFullscreen{
@@ -30,6 +51,25 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.game-steering{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 720px;
+    height: 64px;
+}
+
+.steering-elements{
+    width: 52px;
+    height: 80%;
+    background-color: #b05b22;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .control{
@@ -42,6 +82,23 @@ canvas {
     position: absolute;
     top: 75%;
     width: 700px;
+}
+
+.icon-container{
+    padding: 4px 4px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #b05b22;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-container:hover{
+    background-color: #a35521;
 }
 
 .alert{
@@ -77,8 +134,13 @@ canvas {
     background-color: #b05b22;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
 }
+
+.startBtn:hover{
+    background-color: #a35521;
+}
+
 
 .restartBtn{
     display: none;
@@ -88,7 +150,11 @@ canvas {
     background-color: #b05b22;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+}
+
+.restartBtn:hover{
+    background-color: #a35521;
 }
 
 button:active {
@@ -135,15 +201,10 @@ button:active {
 }
 
 
-.description {
-    display: flex;
-    gap: 12px;
-}
 
-.gameIcons{
-    padding-left: 12px;
-    padding-right: 12px;
-}
+/* .gameIcons{
+    height: 32px;
+} */
 
 
 

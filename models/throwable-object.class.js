@@ -1,9 +1,7 @@
-class ThrowableObject extends MovableObject{
-
+class ThrowableObject extends MovableObject {
 
     height = 60;
     width = 50;
-
 
     IMAGES_FLYINGBOTTLE = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -33,15 +31,15 @@ class ThrowableObject extends MovableObject{
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
-    constructor(x,y, speedX, speedY,BottleImg ){
+    constructor(x, y, speedX, speedY, BottleImg) {
         super().loadImage(this.IMAGES_FLYINGBOTTLE[0])
         this.loadImages(this.IMAGES_FLYINGBOTTLE);
         this.loadImages(this.IMAGES_SPLASH);
 
         this.x = x;
         this.y = y;
-        if(BottleImg != undefined){
-            this.trow(speedX,speedY,BottleImg);
+        if (BottleImg != undefined) {
+            this.trow(speedX, speedY, BottleImg);
         }
     }
 
@@ -51,13 +49,13 @@ class ThrowableObject extends MovableObject{
      * @param {integer} speedY 
      * @param {array} BottleImg 
      */
-    trow(speedX, speedY, BottleImg){
+    trow(speedX, speedY, BottleImg) {
         this.speedY = speedY;
         this.applyGravity();
         setInterval(() => {
             this.x += speedX;
             this.playAnimation(BottleImg);
-        },50)
+        }, 50)
     }
 
 }

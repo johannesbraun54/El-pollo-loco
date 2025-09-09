@@ -296,7 +296,7 @@ class World {
      * action that happend if the game is won
      */
     youWonTheGame() {
-        this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/game over.png', this.character.x - 100);
+        this.endscreen = new BackgroundObject('img/9_intro_outro_screens/game_over/you_won.png', this.character.x - 100);
         this.addToMap(this.endscreen);
         !this.gameEnded ? this.winGame_sound.play() : '';
         stopGame();

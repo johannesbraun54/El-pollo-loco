@@ -77,6 +77,7 @@ class Character extends MovableObject{
     ]
 
     world;
+    keyboard;
     walking_sound = new Audio('audio/running.mp3');
     hurt_sound = new Audio('audio/hurt.wav');
     canJump = false;
@@ -97,13 +98,6 @@ class Character extends MovableObject{
     }
 
     /**
-     * sets the value of the variable "lastMove"
-     */
-    getLastMove(){
-        this.lastMove = new Date().getTime();
-    }
-
-    /**
      * calculates the value for "timepassed" 
      * @returns  accordingly true or false
      */
@@ -114,13 +108,20 @@ class Character extends MovableObject{
     }
 
     /**
+     * sets the value of the variable "lastMove", it's the current timestamp
+     */
+    getLastMove(){
+        this.lastMove = new Date().getTime();
+    }
+
+    /**
      * calculates the value for "timepassed" 
      * @returns  accordingly true or false
      */
     checkSleeping(){
         let timepassed = new Date().getTime() - this.lastMove;
         timepassed = timepassed / 1000;
-        return timepassed > 4
+        return timepassed > 8
     }
 
     /**
@@ -162,9 +163,9 @@ class Character extends MovableObject{
                         this.jumpAnimation();
                } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                        this.playAnimation(this.IMAGES_WALKING);
-               }else if(this.checkSleeping()) {
+               }else if(this.checkSleeping() && !characterIsThrowing) {
                    this.playAnimation(this.IMAGES_SLEEPING);
-               }else if(this.checklastMove()){
+               }else if(this.checklastMove() && !characterIsThrowing){
                    this.playAnimation(this.IMAGES_IDLE);
                }else{
                 this.loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -209,7 +210,7 @@ class Character extends MovableObject{
     worldLeftEnd(){
        return this.x > 0
     }
-
+    
     /**
     * pushs the current sound into the sounds Array
     */

@@ -134,16 +134,15 @@ class MovableObject extends DrawableObject {
     }
 
     /**
-     * checks collision for objects
+     * checks collision for  movabale objects
      * @param {object} mo 
      * @returns true if collsion is happend
      */
     isColliding(mo){
-        return  this.x + this.width - this.offset.right > mo.x + mo.offset.left && // kontrolle kollision character vorderkante mit enemy 
-                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // kontrolle mit der kollision Y-Achse oberkante von enemy
-                this.x + this.offset.left < mo.x + mo.width - mo.offset.right && //kontrolle kollision character hinterkante mit enemy 
-                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom // kontrolle mit der kollision Y-Achse unterkante von enemy
+        return  this.x + this.width - this.offset.right > mo.x + mo.offset.left && // check collision: character front edge with enemy
+                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // check collision on Y-axis: character bottom edge with enemy top
+                this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // check collision: character back edge with enemy
+                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom // check collision on Y-axis: character top edge with enemy bottom
     }
-
 
 }

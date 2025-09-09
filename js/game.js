@@ -9,6 +9,7 @@ let intervalIds = [];
 let sounds = [];
 let i = 1;
 let soundsAreNew = true;
+let characterIsThrowing  = false
 
 
 /**
@@ -69,14 +70,12 @@ function hideIconFullscreen() {
  */
 function steerSound() {
     if (soundIsRunning) {
-        //game_song.pause();
         sounds.forEach(sound => {
             sound.muted = true;
         });
         soundIsRunning = false;
         document.getElementById('soundON').src = 'img/9_intro_outro_screens/soundOFF.png';
     } else {
-        //game_song.play();
         sounds.forEach(sound => {
             sound.muted = false;
         });
@@ -151,7 +150,7 @@ function becomeFullscreen() {
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+    } else if (element.msRequestFullscreen) {     
         element.msRequestFullscreen();
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
@@ -196,9 +195,10 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 68 && !(world.gameEnded) && !(world.throwLock)) {
         world.throwLock = true;
         keyboard.D = true;
+        characterIsThrowing = true
         setTimeout(() => {
             world.throwLock = false;
-        }, 400);
+        }, 800);
     }
 });
 
@@ -220,6 +220,7 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode == 68) {
         keyboard.D = false;
+        characterIsThrowing = false;
     }
     if (e.keyCode === 70) {
         keyboard.F = false;
