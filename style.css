@@ -1,21 +1,21 @@
 @font-face {
     font-family: 'zabars';
-    src: url('fonts/zabars.ttf') format('truetype'); 
-}  
+    src: url('fonts/zabars.ttf') format('truetype');
+}
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url('img/5_background/canyon-7631482_1920.png');
-    font-family:  'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 0px;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
 }
 
-.description {
+.instruction {
     margin-top: 48px;
     margin-bottom: 48px;
     display: flex;
@@ -25,7 +25,7 @@ body {
     height: 64px;
 }
 
-.description-icon {
+.instruction-icon {
     width: 20%;
     height: 80%;
     display: flex;
@@ -35,7 +35,7 @@ body {
     border-radius: 8px;
 }
 
-.description-icon img {
+.instruction-icon img {
     height: 32px;
 }
 
@@ -46,14 +46,14 @@ canvas {
     margin-bottom: 48px;
 }
 
-.canvasFullscreen{
+.canvasFullscreen {
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
 
-.game-steering{
+.game-steering {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -62,7 +62,7 @@ canvas {
     height: 64px;
 }
 
-.steering-elements{
+.steering-elements {
     width: 52px;
     height: 80%;
     background-color: #b05b22;
@@ -70,13 +70,20 @@ canvas {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.2);
 }
 
-.control{
+.steering-elements:hover {
+    cursor: pointer;
+    background-color: #a35521;
+}
+
+.control {
     display: flex;
 }
 
-.absolute{
+.absolute {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -84,7 +91,7 @@ canvas {
     width: 700px;
 }
 
-.icon-container{
+.icon-container {
     padding: 4px 4px;
     font-size: 20px;
     cursor: pointer;
@@ -97,20 +104,20 @@ canvas {
     justify-content: center;
 }
 
-.icon-container:hover{
+.icon-container:hover {
     background-color: #a35521;
 }
 
-.alert{
- display: none;
+.alert {
+    display: none;
 }
 
-.absoluteFullscreen{
+.absoluteFullscreen {
     top: 90%;
     width: 90%;
 }
 
-.canvasFullscreen{
+.canvasFullscreen {
     position: absolute;
     top: 0;
     left: 0;
@@ -118,16 +125,16 @@ canvas {
     height: 100vh;
 }
 
-.emptyDiv{
+.emptyDiv {
     height: 40px;
     width: 40px;
 }
 
-.absolute img{
+.absolute img {
     width: 40px;
 }
 
-.startBtn{
+.startBtn {
     padding: 15px 30px;
     font-size: 20px;
     cursor: pointer;
@@ -135,14 +142,15 @@ canvas {
     color: white;
     border: none;
     border-radius: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.2);
 }
 
-.startBtn:hover{
+.startBtn:hover {
     background-color: #a35521;
 }
 
-
-.restartBtn{
+.restartBtn {
     display: none;
     padding: 15px 30px;
     font-size: 20px;
@@ -151,28 +159,25 @@ canvas {
     color: white;
     border: none;
     border-radius: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.2);
 }
 
-.restartBtn:hover{
+.restartBtn:hover {
     background-color: #a35521;
 }
 
-button:active {
-    background-color: #9f5321;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.gameStartBtn{
+.gameStartBtn {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.gameStartBtn img{
+.gameStartBtn img {
     cursor: pointer;
 }
 
-.fullscreen{
+.fullscreen {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,7 +185,7 @@ button:active {
     background-position: start;
 }
 
-.mobileKey{
+.mobileKey {
     display: none;
     width: 50px;
     height: 50px;
@@ -195,48 +200,48 @@ button:active {
     margin-right: 16px;
 }
 
-.mobileKey:active{
+.mobileKey:active {
     background-color: #9f5321;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-
-
-/* .gameIcons{
-    height: 32px;
-} */
-
-
-
-
-@media only screen and (max-width: 720px){
-    canvas{
+@media only screen and (max-width: 720px) {
+    canvas {
         width: 100vw;
     }
-    .absolute{
+
+    .instruction {
+        width: 100%;
+    }
+
+    .game-steering {
+        width: 100%;
+    }
+
+    .absolute {
         width: 100vw;
-        top: 73%;   
-        transform: translateY(-50%); 
-       
+        top: 73%;
+        transform: translateY(-50%);
+
     }
 
 }
 
-@media only screen and (max-width: 600px){
-    .absolute{
+@media only screen and (max-width: 600px) {
+    .absolute {
         width: 100vw;
-        top: 60%;   
+        top: 60%;
     }
 }
 
 
-@media only screen and (max-width: 474px){
-    .absolute{
+@media only screen and (max-width: 474px) {
+    .absolute {
         width: 100vw;
-        top: 50%;   
+        top: 50%;
     }
 
-    .alert{
+    .alert {
         position: fixed;
         top: 0px;
         bottom: 0px;
@@ -254,53 +259,54 @@ button:active {
     }
 }
 
-@media only screen and (max-height: 600px){
+@media only screen and (max-height: 600px) {
     h1 {
         display: none;
     }
 
-    .description{
+    .description {
         display: none;
     }
 
-    .absolute{
+    .absolute {
         width: 100vw;
-        top: 80%;   
+        top: 80%;
     }
 }
 
 
-@media only screen and (max-height: 480px){
+@media only screen and (max-height: 480px) {
 
     body {
         overflow: hidden;
     }
-    canvas{
+
+    canvas {
         width: 100vw;
         height: 100vh;
     }
 
-    .alert{
+    .alert {
         display: none;
     }
 
-    .fullscreenIcon{
+    .fullscreenIcon {
         display: none;
     }
 
-    .absolute{
-        width: 100vw; 
+    .absolute {
+        width: 100vw;
     }
 
-    .description{
+    .description {
         display: none;
     }
 
-    .mobileKey{
+    .mobileKey {
         display: flex;
     }
 
-    .absolute{
+    .absolute {
         top: 80%;
     }
 

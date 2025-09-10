@@ -14,6 +14,7 @@ El-pollo-loco is an interactive web-based game that combines fun and strategy. I
 1. Clone the repository:
     ```bash
     git clone https://github.com/johannesbraun54/El-pollo-loco.git
+    cd El-pollo-loco
     ```
 
 2. Open the `index.html` file in your browser to start playing.
@@ -21,7 +22,7 @@ El-pollo-loco is an interactive web-based game that combines fun and strategy. I
 ## Usage
 
 1. Open the `index.html` file in a web browser.
-2. Follow the game instructions to complete the levels.
+2. Follow the game instructions to complete the game. Jump with Character PEPE on small hostile chickens. Collect coins and salsa bottles for beating the big Endboss - and winning the game.
 
 ## Technologies
 
@@ -35,7 +36,7 @@ Feel free to fork the repository, make improvements, and submit a pull request. 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License .
 
 ## Support
 
