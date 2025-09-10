@@ -153,6 +153,7 @@ class World {
     checkIfCharacterIsBehindBoss() {
         if (this.character.x > this.level.enemies[this.level.enemies.length - 1].x) {
             this.character.isDead();
+            this.statusBar.setPercentage(0)
             this.characterDied = true;
             for (let i = 0; i < this.character.IMAGES_DEATH.length; i++) {
                 this.character.playAnimation(this.character.IMAGES_DEATH);

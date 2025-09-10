@@ -56,7 +56,8 @@ function gameStart() {
  * hides the start button
  */
 function hideButton() {
-    document.getElementById('startBtn').style = 'display: none;'
+    document.getElementById('startBtn').style = 'display: none;!important';
+    document.getElementById('responsiveStartBtn').style = 'display: none;!important'
 }
 
 function hideIconFullscreen() {
@@ -111,7 +112,8 @@ function stopGame() {
  */
 function restartTheGame() {
     gameStart();
-    document.getElementById('restartBtn').style = 'display: none;'
+    document.getElementById('restartBtn').style = 'display: none;';
+    document.getElementById('responsiveRestartBtn').style = 'display: none;'
     world = new World(canvas, keyboard);
     startTheGame();
 }
@@ -121,17 +123,19 @@ function restartTheGame() {
  */
 function showRestartBtn() {
     document.getElementById('restartBtn').style = 'display: flex;'
+    document.getElementById('responsiveRestartBtn').style = 'display: flex;' 
 }
 
 /**
  * checks fullscreen status and shows the right icon
  */
-function becomeFullscreen() {
+function toggleFullscreen() {
     let fullscreenDiv = document.getElementById('fullscreen')
     if (fullscreen) {
         exitFullscreen();
         document.getElementById('absolute').classList.remove('absoluteFullscreen');
         document.getElementById('canvas').classList.remove('canvasFullscreen');
+        document.getElementById("gameSteering").style.top = "";
         document.getElementById('fullscreenIcon').src = 'img/9_intro_outro_screens/fullscreen.svg';
         fullscreen = false;
     } else {
@@ -139,6 +143,7 @@ function becomeFullscreen() {
         document.getElementById('fullscreenIcon').src = 'img/9_intro_outro_screens/exitFullscreen.png';
         document.getElementById('absolute').classList.add('absoluteFullscreen');
         document.getElementById('canvas').classList.add('canvasFullscreen');
+        document.getElementById("gameSteering").style.top = "45%";
         fullscreen = true;
     }
 }
