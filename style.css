@@ -12,7 +12,8 @@ body {
     margin: 0px;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .instruction {
@@ -28,11 +29,13 @@ body {
 .instruction-icon {
     width: 20%;
     height: 80%;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background-color: #b05b22;
     border-radius: 8px;
+
 }
 
 .instruction-icon img {
@@ -79,8 +82,8 @@ canvas {
     background-color: #a35521;
 }
 
-.control {
-    display: flex;
+.mobile-steering {
+    display: none;
 }
 
 .absolute {
@@ -182,7 +185,6 @@ canvas {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-position: start;
 }
 
 .mobileKey {
@@ -205,9 +207,9 @@ canvas {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 735px) {
     canvas {
-        width: 100vw;
+        width: 100%;
     }
 
     .instruction {
@@ -259,14 +261,7 @@ canvas {
     }
 }
 
-@media only screen and (max-height: 600px) {
-    h1 {
-        display: none;
-    }
-
-    .description {
-        display: none;
-    }
+@media only screen and (max-height: 600px) { */
 
     .absolute {
         width: 100vw;
@@ -282,7 +277,7 @@ canvas {
     }
 
     canvas {
-        width: 100vw;
+        width: 100%;
         height: 100vh;
     }
 
@@ -294,11 +289,40 @@ canvas {
         display: none;
     }
 
+    .mobile-steering {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        top: 80%;
+        width: 100%;
+        padding: 0px 12px;
+        box-sizing: border-box;
+    }
+
+    .mobile-steering img {
+        width: 40px;
+    }
+
+    .steering-icons{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .fullscreen {
+        width: 100%;
+    }
+
     .absolute {
         width: 100vw;
     }
 
-    .description {
+    .instruction {
+        display: none;
+    }
+
+    .game-steering{
         display: none;
     }
 
@@ -308,9 +332,5 @@ canvas {
 
     .absolute {
         top: 80%;
-    }
-
-    h1 {
-        display: none;
     }
 }
